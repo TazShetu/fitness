@@ -19,7 +19,7 @@ class UserController extends Controller
     public function users()
     {
         if (Auth::user()->isAbleTo('user')) {
-            $users = User::where('id', '>', '1')->get();
+            $users = User::where('id', '>', '1')->where('is_app', null)->get();
             foreach ($users as $u) {
                 $u['role'] = $u->roles()->get();
             }
@@ -83,7 +83,7 @@ class UserController extends Controller
         if (Auth::user()->isAbleTo('user') && ($uid * 1) > 3) {
             $uedit = User::find($uid);
             if ($uedit) {
-                $users = User::where('id', '>', '3')->get();
+                $users = User::where('id', '>', '3')->where('is_app', null)->get();
                 $roles = Role::where('id', '>', '3')->get();
                 $redits = $uedit->roles()->get();
                 $uinfo = Userinfo::where('user_id', $uid)->first();
@@ -162,7 +162,7 @@ class UserController extends Controller
     {
         if (Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')) {
             $u = User::find($uid);
-            if ($u) {
+            if ($u && ($u->is_app == null)) {
                 DB::beginTransaction();
                 try {
                     $u->detachRoles();
@@ -196,7 +196,7 @@ class UserController extends Controller
     {
         if (Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')) {
             $user = User::find($uid);
-            if ($user) {
+            if ($user && ($user->is_app == null)) {
                 $roles = Role::where('id', '>', '3')->get();
                 return view('users.active', compact('user', 'roles'));
             } else {
@@ -256,7 +256,7 @@ class UserController extends Controller
         $uid = Auth::id();
         $uedit = User::find($uid);
         $redits = $uedit->roles()->get();
-        if (($redits[0]->id) != 1) {
+        if ((($redits[0]->id) != 1) && ($uedit->is_app == null)) {
             $uinfo = Userinfo::where('user_id', $uid)->first();
             return view('users.accountSettings', compact('uedit', 'uinfo'));
         } else {
