@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VideoCategory;
 use App\Models\VideoSubCategoryOne;
+use App\Models\VideoSubCategoryTwo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -12,6 +13,7 @@ use Laravel\Passport\Passport;
 
 class ApiController extends Controller
 {
+
     public function loginFail()
     {
         return response()->json([
@@ -64,7 +66,12 @@ class ApiController extends Controller
         }
         $responseArray = [];
         $responseArray['data'] = $a;
-        return response()->json($responseArray, 200);
+        if (count($a) == 0) {
+            $responseArray['message'] = "Nothing found in Database";
+            return response()->json($responseArray, 204);
+        } else {
+            return response()->json($responseArray, 200);
+        }
     }
 
 
@@ -72,21 +79,58 @@ class ApiController extends Controller
     {
         $c = VideoCategory::find($cid);
         if ($c) {
-            if (Cache::has('video_sub_categories_one')) {
-                $a = Cache::get('video_sub_categories_one');
+            if (Cache::has('video_sub_categories_one'."$cid")) {
+                $a = Cache::get('video_sub_categories_one'."$cid");
             } else {
                 $a = VideoSubCategoryOne::where('category_id', $cid)->get();
-                Cache::put('video_sub_categories_one', $a, now()->addMonths(1));
+                Cache::put('video_sub_categories_one'."$cid", $a, now()->addMonths(1));
             }
             $responseArray = [];
             $responseArray['data'] = $a;
-            return response()->json($responseArray, 200);
+            if (count($a) == 0) {
+                $responseArray['message'] = "Nothing found in Database";
+                return response()->json($responseArray, 204);
+            } else {
+                return response()->json($responseArray, 200);
+            }
         } else {
             return response()->json([
                 'error' => 'Wrong Category Id provided in the endpoint'
             ], 404);
         }
+    }
 
+
+    public function getSubCategoriesTwo($cid, $scid)
+    {
+        $c = VideoCategory::find($cid);
+        if ($c) {
+            $sc = VideoSubCategoryOne::find($scid);
+            if ($sc) {
+                if (Cache::has('video_sub_categories_two'."$cid"."$scid")) {
+                    $a = Cache::get('video_sub_categories_two'."$cid"."$scid");
+                } else {
+                    $a = VideoSubCategoryTwo::where('category_id', $cid)->where('sub_category_one_id', $scid)->get();
+                    Cache::put('video_sub_categories_two'."$cid"."$scid", $a, now()->addMonths(1));
+                }
+                $responseArray = [];
+                $responseArray['data'] = $a;
+                if (count($a) == 0) {
+                    $responseArray['message'] = "Nothing found in Database";
+                    return response()->json($responseArray, 204);
+                } else {
+                    return response()->json($responseArray, 200);
+                }
+            } else {
+                return response()->json([
+                    'error' => 'Wrong Sub Category Id provided in the endpoint'
+                ], 404);
+            }
+        } else {
+            return response()->json([
+                'error' => 'Wrong Category Id provided in the endpoint'
+            ], 404);
+        }
     }
 
 

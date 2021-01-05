@@ -5,6 +5,7 @@ use App\Http\Controllers\ACLController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoSubCategoryOneController;
+use App\Http\Controllers\VideoSubCategoryTwoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,18 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('video.sub.category.one.update');
     Route::delete('/videos/sub_category_one/delete/{cid}', [VideoSubCategoryOneController::class, 'destroy'])
         ->name('video.sub.category.one.delete');
+
+
+    Route::get('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'index'])
+        ->name('video.sub.category.two');
+    Route::post('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'store'])
+        ->name('video.sub.category.two.store');
+    Route::get('/videos/sub_category_two/edit/{cid}', [VideoSubCategoryTwoController::class, 'edit'])
+        ->name('video.sub.category.two.edit');
+    Route::post('/videos/sub_category_two/edit/{cid}', [VideoSubCategoryTwoController::class, 'update'])
+        ->name('video.sub.category.two.update');
+    Route::delete('/videos/sub_category_two/delete/{cid}', [VideoSubCategoryTwoController::class, 'destroy'])
+        ->name('video.sub.category.two.delete');
 
 
 });

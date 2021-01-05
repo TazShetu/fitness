@@ -90,17 +90,17 @@ class VideoSubCategoryOneController extends Controller
     }
 
 
-//    public function destroy($cid)
-//    {
-//        if (Auth::user()->isAbleTo('video_sub_category_one')) {
-//            $cedit = VideoCategory::find($cid);
-//            if ($cedit) {
-//                dd('VideoCategoryController destroy()');
-//            } else {
-//                abort(404);
-//            }
-//        } else {
-//            abort(403);
-//        }
-//    }
+    public function destroy($cid)
+    {
+        if (Auth::user()->isAbleTo('video_sub_category_one')) {
+            $cedit = VideoSubCategoryOne::find($cid);
+            if ($cedit) {
+                dd('VideoSubCategoryOneController destroy()');
+            } else {
+                abort(404);
+            }
+        } else {
+            abort(403);
+        }
+    }
 }
