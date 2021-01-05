@@ -17,11 +17,11 @@
                     <img
                         src="
                     @if(Auth::user()->profile_photo_path)
-                    {{asset(Auth::user()->profile_photo_path)}}
-                    @else
+                        {{asset(Auth::user()->profile_photo_path)}}
+                        @else
                         {{asset('joli/avatar.png')}}
-                    @endif
-                        " alt="Profile Image">
+                        @endif
+                            " alt="Profile Image">
                 </div>
                 <div class="profile-data">
                     <div class="profile-data-name">{{Auth::user()->name}}</div>
@@ -49,12 +49,16 @@
             </ul>
         </li>
         @endpermission
-        @permission('video_category|image_vendor')
+        @permission('video_category|video_sub_category_one')
         <li class="xn-openable">
             <a href="#"><span class="fa fa-youtube-play"></span> <span class="xn-text"> Videos</span></a>
             <ul>
                 @permission('video_category')
                 <li><a href="{{route('video.category')}}"><i class="glyphicon glyphicon-minus"></i> Category</a></li>
+                @endpermission
+                @permission('video_sub_category_one')
+                <li><a href="{{route('video.sub.category.one')}}"><i class="glyphicon glyphicon-minus"></i> Sub Category
+                        One</a></li>
                 @endpermission
             </ul>
         </li>

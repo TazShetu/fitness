@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ACLController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ImageVendorController;
 use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\VideoSubCategoryOneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +73,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('video.category.update');
     Route::delete('/videos/category/delete/{cid}', [VideoCategoryController::class, 'destroy'])
         ->name('video.category.delete');
+
+    Route::get('/videos/sub_category_one', [VideoSubCategoryOneController::class, 'index'])
+        ->name('video.sub.category.one');
+    Route::post('/videos/sub_category_one', [VideoSubCategoryOneController::class, 'store'])
+        ->name('video.sub.category.one.store');
+    Route::get('/videos/sub_category_one/edit/{cid}', [VideoSubCategoryOneController::class, 'edit'])
+        ->name('video.sub.category.one.edit');
+    Route::post('/videos/sub_category_one/edit/{cid}', [VideoSubCategoryOneController::class, 'update'])
+        ->name('video.sub.category.one.update');
+    Route::delete('/videos/sub_category_one/delete/{cid}', [VideoSubCategoryOneController::class, 'destroy'])
+        ->name('video.sub.category.one.delete');
 
 
 });

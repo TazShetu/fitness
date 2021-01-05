@@ -34,8 +34,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Image Category Name" name="name" required
-                                           value="{{$cedit->name}}"
+                                    <input type="text" name="name" required value="{{$cedit->name}}"
                                            class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}">
                                 </div>
                                 @if($errors->has('name'))
@@ -49,7 +48,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Image Category Description" name="description"
+                                    <input type="text" placeholder="Video Category Description" name="description"
                                            value="{{$cedit->description}}"
                                            class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
                                 </div>
@@ -98,7 +97,7 @@
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-danger m-1"
-                                                    onclick="return confirm('Are you sure you want to delete the Image Category ?')">
+                                                    onclick="return confirm('Are you sure you want to delete the Video Category ?')">
                                                 [[ <i class="fa fa-trash-o"></i> ]]
                                             </button>
                                         </form>

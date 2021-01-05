@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VideoCategory;
+use App\Models\VideoSubCategoryOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -17,8 +18,6 @@ class ApiController extends Controller
             'error' => 'Token Error'
         ], 401);
     }
-
-
 
 
     public function loginu(Request $request)
@@ -68,6 +67,27 @@ class ApiController extends Controller
         return response()->json($responseArray, 200);
     }
 
+
+    public function getSubCategoriesOne($cid)
+    {
+        $c = VideoCategory::find($cid);
+        if ($c) {
+            if (Cache::has('video_sub_categories_one')) {
+                $a = Cache::get('video_sub_categories_one');
+            } else {
+                $a = VideoSubCategoryOne::where('category_id', $cid)->get();
+                Cache::put('video_sub_categories_one', $a, now()->addMonths(1));
+            }
+            $responseArray = [];
+            $responseArray['data'] = $a;
+            return response()->json($responseArray, 200);
+        } else {
+            return response()->json([
+                'error' => 'Wrong Category Id provided in the endpoint'
+            ], 404);
+        }
+
+    }
 
 
 }

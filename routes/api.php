@@ -26,4 +26,6 @@ Route::post('/v1/login', [ApiController::class, 'loginu']);
 Route::get('/login/fail', [ApiController::class, 'loginFail'])->name('loginFail');
 
 Route::get('/v1/categories', [ApiController::class, 'getCategories'])->middleware(['auth:api', 'scope:user']);;
+Route::get('/v1/sub_categories_one/{cid}', [ApiController::class, 'getSubCategoriesOne'])
+    ->middleware(['auth:api', 'scope:user']);;
 

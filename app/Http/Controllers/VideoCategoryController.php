@@ -32,7 +32,7 @@ class VideoCategoryController extends Controller
             $c->name = $request->name;
             $c->description = $request->description;
             $c->save();
-            Session::flash('success', "The Image Category has been created successfully.");
+            Session::flash('success', "The Video Category has been created successfully.");
             return redirect()->back();
         } else {
             abort(403);
@@ -72,7 +72,7 @@ class VideoCategoryController extends Controller
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
                 $cedit->update();
-                Session::flash('success', "The Image Category has been updated successfully.");
+                Session::flash('success', "The Video Category has been updated successfully.");
                 return redirect()->back();
             } else {
                 abort(404);
