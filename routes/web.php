@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoSubCategoryOneController;
 use App\Http\Controllers\VideoSubCategoryTwoController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +87,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/videos/sub_category_one/delete/{cid}', [VideoSubCategoryOneController::class, 'destroy'])
         ->name('video.sub.category.one.delete');
 
-
     Route::get('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'index'])
         ->name('video.sub.category.two');
     Route::post('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'store'])
@@ -97,6 +97,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('video.sub.category.two.update');
     Route::delete('/videos/sub_category_two/delete/{cid}', [VideoSubCategoryTwoController::class, 'destroy'])
         ->name('video.sub.category.two.delete');
+
+    Route::get('/videos/upload', [VideoController::class, 'upload'])->name('video.upload');
+    Route::post('/videos/upload', [VideoController::class, 'uploadStore'])->name('video.upload.store');
+
 
 
 });

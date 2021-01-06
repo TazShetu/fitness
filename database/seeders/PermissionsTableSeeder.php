@@ -15,8 +15,10 @@ class PermissionsTableSeeder extends Seeder
             1 => ["role", "Role", "Role menu that goes under ACL"],
             2 => ["user", "User", "User menu that goes under ACL"],
             3 => ["video_category", "Video Category", "Category menu that goes under Videos"],
-            4 => ["video_sub_category_one", "Sub Category One", "Sub Category One menu that goes under Images"],
-            5 => ["video_sub_category_two", "Sub Category Two", "Sub Category Two menu that goes under Images"],
+            4 => ["video_sub_category_one", "Sub Category One", "Sub Category One menu that goes under Videos"],
+            5 => ["video_sub_category_two", "Sub Category Two", "Sub Category Two menu that goes under Videos"],
+            6 => ["video", "Video Upload and List", "Upload and List menu that goes under Videos"],
+            7 => ["music", "Music", "Music menu"],
         ];
         $superAdmin = Role::find(2);
         $admin = Role::find(3);

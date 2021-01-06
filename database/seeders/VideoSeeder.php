@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\VideoCategory;
 use App\Models\VideoSubCategoryOne;
+use App\Models\VideoSubCategoryTwo;
 use Illuminate\Database\Seeder;
 
 class VideoSeeder extends Seeder
@@ -24,7 +25,7 @@ class VideoSeeder extends Seeder
 
         $cSubCategories = [
             0 => ['Beginner'],
-            1 => ['Intern'],
+            1 => ['Intermediate'],
             2 => ['Advance'],
         ];
         $vcs = VideoCategory::all();
@@ -37,6 +38,86 @@ class VideoSeeder extends Seeder
             }
         }
 
+        $c1s1 = ['Full Body', 'Shape It', 'Body Shape', 'On all fours-Core exercise', 'Upper Body', 'Pilates'];
+        foreach ($c1s1 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 1;
+            $c->sub_category_one_id = 1;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c1s2 = ['Full Body', 'Cardio and Abs', 'TABATA', 'Power Boost', 'Sore Core', 'Twister', 'Power Cardio'];
+        foreach ($c1s2 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 1;
+            $c->sub_category_one_id = 2;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c1s3 = ['Full Body', 'Athletic', 'Insane Abs', 'High and Higher', 'Strength', 'Cardio'];
+        foreach ($c1s3 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 1;
+            $c->sub_category_one_id = 3;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c2s4 = ['Full Body', 'Apple Butt', 'Shape It', 'PT’s Choice', 'Back', 'Inner Thighs'];
+        foreach ($c2s4 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 2;
+            $c->sub_category_one_id = 4;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c2s5 = ['Full Body', 'Booty Bootcamp', 'Butt Lift', 'Tabata Core', 'Down To Earth', 'Hamstrings', 'Sore Core'];
+        foreach ($c2s5 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 2;
+            $c->sub_category_one_id = 5;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c2s6 = ['Full Body', 'Muscle Definer', 'Beach Body', 'Abs of Steel', 'Triceps', 'Flamingo'];
+        foreach ($c2s6 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 2;
+            $c->sub_category_one_id = 6;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c3s7 = ['Full Body', 'Calorie Burn', 'Belly Burn', 'Bikini Body', 'Body Shape', 'Light'];
+        foreach ($c3s7 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 3;
+            $c->sub_category_one_id = 7;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c3s8 = ['Full Body', 'Apple Butt', 'Cardio All The Day', 'Butt Lift', 'Shape It', 'Body Shape', 'Cardio', 'Back and Front'];
+        foreach ($c3s8 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 3;
+            $c->sub_category_one_id = 8;
+            $c->name = $cs;
+            $c->save();
+        }
+
+        $c3s9 = ['Full Body', 'Belly Burn', 'From-tastic', 'Athletic', 'No Limits'];
+        foreach ($c3s9 as $cs) {
+            $c = new VideoSubCategoryTwo;
+            $c->category_id = 3;
+            $c->sub_category_one_id = 9;
+            $c->name = $cs;
+            $c->save();
+        }
 
 
     }

@@ -49,7 +49,7 @@
             </ul>
         </li>
         @endpermission
-        @permission('video_category|video_sub_category_one|video_sub_category_two')
+        @permission('video_category|video_sub_category_one|video_sub_category_two|video')
         <li class="xn-openable">
             <a href="#"><span class="fa fa-youtube-play"></span> <span class="xn-text"> Videos</span></a>
             <ul>
@@ -63,6 +63,11 @@
                 @permission('video_sub_category_two')
                 <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> Sub Category
                         Two</a></li>
+                @endpermission
+                @permission('video')
+                <li><a href="{{route('video.upload')}}"><i class="glyphicon glyphicon-minus"></i> Upload</a></li>
+                <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> List</a>
+                </li>
                 @endpermission
             </ul>
         </li>

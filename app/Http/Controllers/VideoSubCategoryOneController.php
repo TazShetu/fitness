@@ -6,11 +6,13 @@ use App\Models\VideoCategory;
 use App\Models\VideoSubCategoryOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class VideoSubCategoryOneController extends Controller
 {
+
     public function index()
     {
         if (Auth::user()->isAbleTo('video_sub_category_one')) {
@@ -38,6 +40,11 @@ class VideoSubCategoryOneController extends Controller
             $sc1->name = $request->name;
             $sc1->description = $request->description;
             $sc1->save();
+            if (Cache::has('video_sub_categories_one'."$sc1->category_id")) {
+                Cache::forget('video_sub_categories_one'."$sc1->category_id");
+                $a = VideoSubCategoryOne::where('category_id', $sc1->category_id)->get();
+                Cache::put('video_sub_categories_one'."$sc1->category_id", $a, now()->addMonths(1));
+            }
             Session::flash('success', "The Video Sub Category One has been created successfully.");
             return redirect()->back();
         } else {
@@ -79,6 +86,11 @@ class VideoSubCategoryOneController extends Controller
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
                 $cedit->update();
+                if (Cache::has('video_sub_categories_one'."$cedit->category_id")) {
+                    Cache::forget('video_sub_categories_one'."$cedit->category_id");
+                    $a = VideoSubCategoryOne::where('category_id', $cedit->category_id)->get();
+                    Cache::put('video_sub_categories_one'."$cedit->category_id", $a, now()->addMonths(1));
+                }
                 Session::flash('success', "The Video Sub Category One has been updated successfully.");
                 return redirect()->back();
             } else {
