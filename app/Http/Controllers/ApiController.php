@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use App\Models\VideoSubCategoryOne;
@@ -159,6 +160,25 @@ class ApiController extends Controller
             return response()->json([
                 'error' => 'Wrong Sub Category Two Id provided in the endpoint'
             ], 404);
+        }
+    }
+
+
+    public function getMusic()
+    {
+        if (Cache::has('music')) {
+            $a = Cache::get('music');
+        } else {
+            $a = Music::all();
+            Cache::put('music', $a, now()->addMonths(1));
+        }
+        $responseArray = [];
+        $responseArray['videos'] = $a;
+        if (count($a) == 0) {
+            $responseArray['message'] = "Nothing found in Database";
+            return response()->json($responseArray, 200);
+        } else {
+            return response()->json($responseArray, 200);
         }
     }
 

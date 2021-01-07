@@ -66,9 +66,19 @@
                 @endpermission
                 @permission('video')
                 <li><a href="{{route('video.upload')}}"><i class="glyphicon glyphicon-minus"></i> Upload</a></li>
-                <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> List</a>
+                <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> [[List]]</a>
                 </li>
                 @endpermission
+            </ul>
+        </li>
+        @endpermission
+        @permission('music')
+        <li class="xn-openable">
+            <a href="#"><span class="fa fa-music"></span> <span class="xn-text"> Music</span></a>
+            <ul>
+                <li><a href="{{route('music.upload')}}"><i class="glyphicon glyphicon-minus"></i> Upload</a></li>
+                <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> [[List]]</a>
+                </li>
             </ul>
         </li>
         @endpermission

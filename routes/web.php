@@ -7,6 +7,7 @@ use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoSubCategoryOneController;
 use App\Http\Controllers\VideoSubCategoryTwoController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\MusicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/videos/upload', [VideoController::class, 'upload'])->name('video.upload');
     Route::post('/videos/upload', [VideoController::class, 'uploadStore'])->name('video.upload.store');
 
+    Route::get('/music/upload', [MusicController::class, 'upload'])->name('music.upload');
+    Route::post('/music/upload', [MusicController::class, 'uploadStore'])->name('music.upload.store');
 
 
 });
