@@ -25,5 +25,13 @@ Route::post('/v1/login', [ApiController::class, 'loginu']);
 // so when email password does not match laravel auto redirects to login route and show unauthorized....
 Route::get('/login/fail', [ApiController::class, 'loginFail'])->name('loginFail');
 
-Route::get('/v1/categories', [ApiController::class, 'getCategories'])->middleware(['auth:api', 'scope:user']);;
+Route::get('/v1/categories', [ApiController::class, 'getCategories'])->middleware(['auth:api', 'scope:user']);
+Route::get('/v1/category/{cid}/sub_categories_one', [ApiController::class, 'getSubCategoriesOne'])
+    ->middleware(['auth:api', 'scope:user']);
+Route::get('/v1/sub_category_one/{scid}/sub_category_two', [ApiController::class, 'getSubCategoriesTwo'])
+    ->middleware(['auth:api', 'scope:user']);
+Route::get('/v1/sub_category_two/{scid}/videos', [ApiController::class, 'getVideosFromSidTwo'])
+    ->middleware(['auth:api', 'scope:user']);
+Route::get('/v1/music', [ApiController::class, 'getMusic'])->middleware(['auth:api', 'scope:user']);
+
 

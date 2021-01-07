@@ -1,12 +1,13 @@
 @extends('layouts.joli')
-@section('title', 'Video Category')
+@section('title', 'Video Sub Category One Edit')
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li>Videos</li>
-        <li class="active">Category</li>
+        <li><a href="{{route('video.sub.category.one')}}">Video Sub Category One</a></li>
+        <li class="active">Edit</li>
     </ul>
 @endsection
-@section('pageTitle', 'Video Category')
+@section('pageTitle', 'Video Sub Category One Edit')
 @section('content')
     <div class="row mb-5">
         @if(session('unSuccess'))
@@ -21,19 +22,36 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Video Category Create</h3>
+                    <h3 class="panel-title">Video Sub Category One Edit</h3>
                 </div>
                 {{--     Form Start              --}}
-                <form action="{{route('video.category.store')}}" class="form-horizontal" method="post">
+                <form action="{{route('video.sub.category.one.update', ['cid' => $scOneedit->id])}}" class="form-horizontal"
+                      method="post">
                     @csrf
                     <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Category</label>
+                            <div class="col-md-6 col-xs-12">
+                                <select class="form-control" name="category_id" required>
+                                    @foreach($categories as $e)
+                                        <option
+                                            value="{{$e->id}}" {{(old('category_id') == $e->id)?'selected':'' }}
+                                            {{($e->id == $scOneedit->category_id)?'selected':''}}>
+                                            {{$e->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('category_id'))
+                                    <span class="help-block text-danger">{{$errors->first('category_id')}}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Name*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Category Name" name="name" required
-                                           value="{{old('name')}}"
+                                    <input type="text" name="name" required value="{{$scOneedit->name}}"
                                            class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}">
                                 </div>
                                 @if($errors->has('name'))
@@ -47,8 +65,8 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Category Description" name="description"
-                                           value="{{old('description')}}"
+                                    <input type="text" placeholder="Video Sub Category One Description" name="description"
+                                           value="{{$scOneedit->description}}"
                                            class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
                                 </div>
                                 @if($errors->has('description'))
@@ -60,7 +78,7 @@
                     <div class="panel-footer">
                         <a title="refresh" class="btn btn-default back" data-link="{{route('back')}}"><span
                                 class="fa fa-refresh"></span></a>
-                        <button class="btn btn-primary pull-right">Create</button>
+                        <button class="btn btn-primary pull-right">Update</button>
                     </div>
                 </form>
                 {{--     Form end               --}}
@@ -69,36 +87,47 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">All Video Categories</h3>
+                    <h3 class="panel-title">All Video Sub Categories One</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Category</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $i => $c)
+                        @foreach($subCategoriesOne as $i => $c)
                             <tr>
                                 <th scope="row">{{$i + 1}}</th>
+                                <td>{{$c->category_name}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
                                 <td>
-                                    <a href="{{route('video.category.edit', ['cid' => $c->id])}}"
-                                       class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
-                                    <form action="{{route('video.category.delete', ['cid' => $c->id])}}" method="POST"
-                                          style="display: inline-table;">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger m-1"
-                                                onclick="return confirm('Are you sure you want to delete the Video Category ?')">
-                                            [[ <i class="fa fa-trash-o"></i> ]]
-                                        </button>
-                                    </form>
+                                    @if($c->id != $scOneedit->id)
+                                        <a href="{{route('video.sub.category.one.edit', ['cid' => $c->id])}}"
+                                           class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
+                                        <form action="{{route('video.sub.category.one.delete', ['cid' => $c->id])}}"
+                                              method="POST" style="display: inline-table;">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger m-1"
+                                                    onclick="return confirm('Are you sure you want to delete the Video Sub Category One ?')">
+                                                [[ <i class="fa fa-trash-o"></i> ]]
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{route('video.sub.category.one.edit', ['cid' => $c->id])}}"
+                                           class="btn btn-sm btn-success m-1 disabled"><span
+                                                class="fa fa-pencil"></span></a>
+                                        <a href="#" class="btn btn-sm btn-danger m-1 disabled"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach

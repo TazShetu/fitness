@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ACLController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ImageVendorController;
 use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\VideoSubCategoryOneController;
+use App\Http\Controllers\VideoSubCategoryTwoController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\MusicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +76,34 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('video.category.update');
     Route::delete('/videos/category/delete/{cid}', [VideoCategoryController::class, 'destroy'])
         ->name('video.category.delete');
+
+    Route::get('/videos/sub_category_one', [VideoSubCategoryOneController::class, 'index'])
+        ->name('video.sub.category.one');
+    Route::post('/videos/sub_category_one', [VideoSubCategoryOneController::class, 'store'])
+        ->name('video.sub.category.one.store');
+    Route::get('/videos/sub_category_one/edit/{cid}', [VideoSubCategoryOneController::class, 'edit'])
+        ->name('video.sub.category.one.edit');
+    Route::post('/videos/sub_category_one/edit/{cid}', [VideoSubCategoryOneController::class, 'update'])
+        ->name('video.sub.category.one.update');
+    Route::delete('/videos/sub_category_one/delete/{cid}', [VideoSubCategoryOneController::class, 'destroy'])
+        ->name('video.sub.category.one.delete');
+
+    Route::get('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'index'])
+        ->name('video.sub.category.two');
+    Route::post('/videos/sub_category_two', [VideoSubCategoryTwoController::class, 'store'])
+        ->name('video.sub.category.two.store');
+    Route::get('/videos/sub_category_two/edit/{cid}', [VideoSubCategoryTwoController::class, 'edit'])
+        ->name('video.sub.category.two.edit');
+    Route::post('/videos/sub_category_two/edit/{cid}', [VideoSubCategoryTwoController::class, 'update'])
+        ->name('video.sub.category.two.update');
+    Route::delete('/videos/sub_category_two/delete/{cid}', [VideoSubCategoryTwoController::class, 'destroy'])
+        ->name('video.sub.category.two.delete');
+
+    Route::get('/videos/upload', [VideoController::class, 'upload'])->name('video.upload');
+    Route::post('/videos/upload', [VideoController::class, 'uploadStore'])->name('video.upload.store');
+
+    Route::get('/music/upload', [MusicController::class, 'upload'])->name('music.upload');
+    Route::post('/music/upload', [MusicController::class, 'uploadStore'])->name('music.upload.store');
 
 
 });
