@@ -66,8 +66,7 @@
                 @endpermission
                 @permission('video')
                 <li><a href="{{route('video.upload')}}"><i class="glyphicon glyphicon-minus"></i> Upload</a></li>
-                <li><a href="{{route('video.sub.category.two')}}"><i class="glyphicon glyphicon-minus"></i> [[List]]</a>
-                </li>
+                <li><a href="{{route('video.list')}}"><i class="glyphicon glyphicon-minus"></i> List</a></li>
                 @endpermission
             </ul>
         </li>

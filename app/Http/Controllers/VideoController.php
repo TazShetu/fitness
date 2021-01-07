@@ -77,4 +77,84 @@ class VideoController extends Controller
         }
     }
 
+
+    public function listVideo()
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            $videos = Video::all();
+            foreach ($videos as $v) {
+                $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
+                $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
+                $cName = VideoCategory::find($v->category_id)->name;
+                $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
+            }
+            return view('videos.list', compact('videos'));
+        } else {
+            abort(403);
+        }
+    }
+
+
+    public function playVideo($vid)
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            $video = Video::find($vid);
+            return view('videos.play', compact('video'));
+        } else {
+            abort(403);
+        }
+    }
+
+
+    public function deleteVideo($vid)
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            $v = Video::find($vid);
+            unlink($v->video);
+            $v->delete();
+            Session::flash('success', "The video has benn deleted successfully.");
+            return redirect()->back();
+        } else {
+            abort(403);
+        }
+    }
+
+
+    public function edit($vid)
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            $vedit = Video::find($vid);
+            return view('videos.edit', compact('vedit'));
+        } else {
+            abort(403);
+        }
+    }
+
+
+    public function update(Request $request, $vid)
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            $request->validate([
+                'title' => 'required',
+                'instruction' => 'required',
+                'calorie' => 'required|min:0.01',
+            ]);
+            $v = Video::find($vid);
+            $v->title = $request->title;
+            $v->instruction = $request->instruction;
+            $v->calorie = $request->calorie;
+            $v->save();
+            if (Cache::has('video' . "$v->sub_category_two_id")) {
+                Cache::forget('video' . "$v->sub_category_two_id");
+                $a = Video::where('sub_category_two_id', $v->sub_category_two_id)->get();
+                Cache::put('video' . "$v->sub_category_two_id", $a, now()->addMonths(1));
+            }
+            Session::flash('success', "The video information has benn updated successfully.");
+            return redirect()->back();
+        } else {
+            abort(403);
+        }
+    }
+
+
 }
