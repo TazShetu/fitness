@@ -109,6 +109,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/music/upload', [MusicController::class, 'upload'])->name('music.upload');
     Route::post('/music/upload', [MusicController::class, 'uploadStore'])->name('music.upload.store');
+    Route::delete('/music/delete/{mid}', [MusicController::class, 'destroy'])->name('music.delete');
+    Route::get('/music/edit/{mid}', [MusicController::class, 'edit'])->name('music.edit');
+    Route::post('/music/edit/{mid}', [MusicController::class, 'update'])->name('music.update');
 
 
 });

@@ -110,8 +110,14 @@ class VideoController extends Controller
     {
         if (Auth::user()->isAbleTo('video')) {
             $v = Video::find($vid);
+            $vsc2id = $v->sub_category_two_id;
             unlink($v->video);
             $v->delete();
+            if (Cache::has('video' . "$vsc2id")) {
+                Cache::forget('video' . "$vsc2id");
+                $a = Video::where('sub_category_two_id', $vsc2id)->get();
+                Cache::put('video' . "$vsc2id", $a, now()->addMonths(1));
+            }
             Session::flash('success', "The video has benn deleted successfully.");
             return redirect()->back();
         } else {
@@ -143,7 +149,7 @@ class VideoController extends Controller
             $v->title = $request->title;
             $v->instruction = $request->instruction;
             $v->calorie = $request->calorie;
-            $v->save();
+            $v->update();
             if (Cache::has('video' . "$v->sub_category_two_id")) {
                 Cache::forget('video' . "$v->sub_category_two_id");
                 $a = Video::where('sub_category_two_id', $v->sub_category_two_id)->get();

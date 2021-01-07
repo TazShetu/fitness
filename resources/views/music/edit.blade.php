@@ -1,11 +1,11 @@
 @extends('layouts.joli')
-@section('title', 'Music Upload')
+@section('title', 'Music Edit')
 @section('breadcrumb')
     <ul class="breadcrumb">
-        <li class="active">Music Upload</li>
+        <li class="active">Music Edit</li>
     </ul>
 @endsection
-@section('pageTitle', 'Music Upload')
+@section('pageTitle', 'Music Edit')
 @section('content')
     <div class="row mb-5">
         @if(session('success'))
@@ -20,10 +20,10 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Music Upload</h3>
+                    <h3 class="panel-title">Music Edit</h3>
                 </div>
                 {{--     Form Start              --}}
-                <form action="{{route('music.upload.store')}}" class="form-horizontal" method="post"
+                <form action="{{route('music.update', ['mid' => $medit->id])}}" class="form-horizontal" method="post"
                       enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
@@ -33,7 +33,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                     <input type="text" placeholder="Music Title" name="title" required
-                                           value="{{old('title')}}"
+                                           value="{{$medit->title}}"
                                            class="form-control {{$errors->has('title') ? 'is-invalid' : ''}}">
                                 </div>
                                 @if($errors->has('title'))
@@ -41,20 +41,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Music</label>
-                            <div class="col-md-6 col-xs-12">
-                                <input type="file" name="music" required>
-                            </div>
-                            @if($errors->has('music'))
-                                <span class="help-block text-danger">{{$errors->first('music')}}</span>
-                            @endif
-                        </div>
                     </div>
                     <div class="panel-footer">
-                        <a title="refresh" class="btn btn-default back" data-link="{{route('back')}}"><span
-                                class="fa fa-refresh"></span></a>
-                        <button class="btn btn-primary pull-right">Upload</button>
+                        <a href="{{route('music.upload')}}" class="btn btn-default">Back</a>
+                        <button class="btn btn-primary pull-right">Update</button>
                     </div>
                 </form>
                 {{--     Form end               --}}
@@ -83,17 +73,25 @@
                                 <td>{{$m->title}}</td>
                                 <td>{{$m->length}}</td>
                                 <td>
-                                    <a href="{{route('music.edit', ['mid' => $m->id])}}"
-                                       class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
-                                    <form action="{{route('music.delete', ['mid' => $m->id])}}" method="POST"
-                                          style="display: inline-table;">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger m-1"
-                                                onclick="return confirm('Are you sure you want to delete the Video?')">
-                                            <i class="fa fa-trash-o"></i>
-                                        </button>
-                                    </form>
+                                    @if($m->id != $medit->id)
+                                        <a href="{{route('music.edit', ['mid' => $m->id])}}"
+                                           class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
+                                        <form action="{{route('music.delete', ['mid' => $m->id])}}" method="POST"
+                                              style="display: inline-table;">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger m-1"
+                                                    onclick="return confirm('Are you sure you want to delete the Video?')">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{route('music.edit', ['mid' => $m->id])}}"
+                                           class="btn btn-sm btn-success m-1 disabled"><span
+                                                class="fa fa-pencil"></span></a>
+                                        <a href="#" class="btn btn-sm btn-danger m-1 disabled"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    @endif
                                 </td>
                                 <td>
                                     <audio controls>
