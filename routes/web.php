@@ -101,9 +101,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/videos/upload', [VideoController::class, 'upload'])->name('video.upload');
     Route::post('/videos/upload', [VideoController::class, 'uploadStore'])->name('video.upload.store');
+    Route::get('/videos/list', [VideoController::class, 'listVideo'])->name('video.list');
+    Route::get('/videos/play/{vid}', [VideoController::class, 'playVideo'])->name('video.play');
+    Route::delete('/videos/delete/{vid}', [VideoController::class, 'deleteVideo'])->name('video.delete');
+    Route::get('/videos/edit/{vid}', [VideoController::class, 'edit'])->name('video.edit');
+    Route::post('/videos/edit/{vid}', [VideoController::class, 'update'])->name('video.update');
 
     Route::get('/music/upload', [MusicController::class, 'upload'])->name('music.upload');
     Route::post('/music/upload', [MusicController::class, 'uploadStore'])->name('music.upload.store');
+    Route::delete('/music/delete/{mid}', [MusicController::class, 'destroy'])->name('music.delete');
+    Route::get('/music/edit/{mid}', [MusicController::class, 'edit'])->name('music.edit');
+    Route::post('/music/edit/{mid}', [MusicController::class, 'update'])->name('music.update');
 
 
 });
