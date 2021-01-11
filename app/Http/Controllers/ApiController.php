@@ -103,62 +103,85 @@ class ApiController extends Controller
     }
 
 
-    public function getSubCategoriesTwo($scid)
+    public function getSubCategoriesTwo($cid, $scid)
     {
-        $sc = VideoSubCategoryOne::find($scid);
-        if ($sc) {
-            if (Cache::has('video_sub_categories_two' . "$scid")) {
-                $a = Cache::get('video_sub_categories_two' . "$scid");
-            } else {
-                $a = VideoSubCategoryTwo::where('sub_category_one_id', $scid)->get();
-                foreach ($a as $i => $b) {
-                    $videos = Video::where('sub_category_two_id', $b->id)->get();
-                    $b['totalVideos'] = count($videos);
-                    $tc = 0;
-                    foreach ($videos as $v) {
-                        $tc = $tc + ($v->calorie * 1);
+        $category = VideoCategory::find($cid);
+        if ($category) {
+            $sc = VideoSubCategoryOne::find($scid);
+            if ($sc) {
+                if (Cache::has('video_sub_categories_two' . "$scid")) {
+                    $a = Cache::get('video_sub_categories_two' . "$scid");
+                } else {
+                    $a = VideoSubCategoryTwo::where('category_id', $cid)->where('sub_category_one_id', $scid)->get();
+                    foreach ($a as $i => $b) {
+                        $videos = Video::where('sub_category_two_id', $b->id)->get();
+                        $b['totalVideos'] = count($videos);
+                        $tc = 0;
+                        foreach ($videos as $v) {
+                            $tc = $tc + ($v->calorie * 1);
+                        }
+                        $b['totalCalories'] = $tc;
                     }
-                    $b['totalCalories'] = $tc;
+                    Cache::put('video_sub_categories_two' . "$scid", $a, now()->addMonths(1));
                 }
-                Cache::put('video_sub_categories_two' . "$scid", $a, now()->addMonths(1));
-            }
-            $responseArray = [];
-            $responseArray['subCategoriesTwo'] = $a;
-            if (count($a) == 0) {
-                $responseArray['message'] = "Nothing found in Database";
-                return response()->json($responseArray, 200);
+                $responseArray = [];
+                $responseArray['subCategoriesTwo'] = $a;
+                if (count($a) == 0) {
+                    $responseArray['message'] = "Nothing found in Database for Category Id $cid and Sub Category One Id $scid";
+                    return response()->json($responseArray, 200);
+                } else {
+                    return response()->json($responseArray, 200);
+                }
             } else {
-                return response()->json($responseArray, 200);
+                return response()->json([
+                    'error' => 'Wrong Sub Category One Id provided in the endpoint'
+                ], 404);
             }
-        } else {
+        }else {
             return response()->json([
-                'error' => 'Wrong Sub Category Id provided in the endpoint'
+                'error' => 'Wrong Category Id provided in the endpoint'
             ], 404);
         }
+
     }
 
 
-    public function getVideosFromSidTwo($scid)
+    public function getVideosFromSidTwo($cid, $sc1id, $sc2id)
     {
-        $sc2 = VideoSubCategoryTwo::find($scid);
-        if ($sc2) {
-            if (Cache::has('video' . "$scid")) {
-                $a = Cache::get('video' . "$scid");
+        $category = VideoCategory::find($cid);
+        if ($category) {
+            $sc = VideoSubCategoryOne::find($sc1id);
+            if ($sc) {
+                $sc2 = VideoSubCategoryTwo::find($sc2id);
+                if ($sc2) {
+                    if (Cache::has('video' . "$sc2id")) {
+                        $a = Cache::get('video' . "$sc2id");
+                    } else {
+                        $a = Video::where('category_id', $cid)->where('sub_category_one_id', $sc1id)
+                                                                        ->where('sub_category_two_id', $sc2id)->get();
+                        Cache::put('video' . "$sc2id", $a, now()->addMonths(1));
+                    }
+                    $responseArray = [];
+                    $responseArray['videos'] = $a;
+                    if (count($a) == 0) {
+                        $responseArray['message'] = "Nothing found in Database Category Id $cid , Sub Category One Id $sc1id and Sub Category Two Id $sc2id";
+                        return response()->json($responseArray, 200);
+                    } else {
+                        return response()->json($responseArray, 200);
+                    }
+                } else {
+                    return response()->json([
+                        'error' => 'Wrong Sub Category Two Id provided in the endpoint'
+                    ], 404);
+                }
             } else {
-                $a = Video::where('sub_category_two_id', $scid)->get();
-                Cache::put('video' . "$scid", $a, now()->addMonths(1));
+                return response()->json([
+                    'error' => 'Wrong Sub Category One Id provided in the endpoint'
+                ], 404);
             }
-            $responseArray = [];
-            $responseArray['videos'] = $a;
-            if (count($a) == 0) {
-                $responseArray['message'] = "Nothing found in Database";
-                return response()->json($responseArray, 200);
-            } else {
-                return response()->json($responseArray, 200);
-            }
-        } else {
+        }else {
             return response()->json([
-                'error' => 'Wrong Sub Category Two Id provided in the endpoint'
+                'error' => 'Wrong Category Id provided in the endpoint'
             ], 404);
         }
     }
@@ -173,7 +196,38 @@ class ApiController extends Controller
             Cache::put('music', $a, now()->addMonths(1));
         }
         $responseArray = [];
-        $responseArray['videos'] = $a;
+        $responseArray['musics'] = $a;
+        if (count($a) == 0) {
+            $responseArray['message'] = "Nothing found in Database";
+            return response()->json($responseArray, 200);
+        } else {
+            return response()->json($responseArray, 200);
+        }
+    }
+
+
+    public function all()
+    {
+        if (Cache::has('all')) {
+            $a = Cache::get('all');
+        } else {
+            $a = VideoCategory::all();
+            foreach ($a as $b) {
+                $sc1s = VideoSubCategoryOne::where('category_id', $b->id)->get();
+                $b['subCategoriesOne'] = $sc1s;
+                foreach ($b['subCategoriesOne'] as $sc1) {
+                    $sc2s = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->id)->get();
+                    $sc1['subCategoriesTwo'] = $sc2s;
+                    foreach ($sc1['subCategoriesTwo'] as $sc2) {
+                        $vs = Video::where('sub_category_two_id', $sc2->id)->get();
+                        $sc2['videos'] = $vs;
+                    }
+                }
+            }
+            Cache::put('all', $a, now()->addMonths(1));
+        }
+        $responseArray = [];
+        $responseArray['all'] = $a;
         if (count($a) == 0) {
             $responseArray['message'] = "Nothing found in Database";
             return response()->json($responseArray, 200);

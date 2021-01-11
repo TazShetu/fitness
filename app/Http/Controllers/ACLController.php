@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Video;
+use App\Models\VideoCategory;
+use App\Models\VideoSubCategoryOne;
+use App\Models\VideoSubCategoryTwo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -193,6 +197,26 @@ class ACLController extends Controller
         } else {
             abort(403);
         }
+    }
+
+
+
+    public function test()
+    {
+        $a = VideoCategory::all();
+        foreach ($a as $b) {
+            $sc1s = VideoSubCategoryOne::where('category_id', $b->id)->get();
+            $b['subCategoriesOne'] = $sc1s;
+            foreach ($b['subCategoriesOne'] as $sc1) {
+                $sc2s = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->id)->get();
+                $sc1['subCategoriesTwo'] = $sc2s;
+                foreach ($sc1['subCategoriesTwo'] as $sc2) {
+                    $vs = Video::where('sub_category_two_id', $sc2->id)->get();
+                    $sc2['videos'] = $vs;
+                }
+            }
+        }
+        dd($a);
     }
 
 

@@ -6,7 +6,7 @@ use App\Mail\TwinbitActivationEmailClass;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserCreateHistory;
-use App\Models\Userinfo;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
