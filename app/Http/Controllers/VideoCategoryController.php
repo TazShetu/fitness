@@ -34,6 +34,7 @@ class VideoCategoryController extends Controller
             $c->name = $request->name;
             $c->description = $request->description;
             $c->save();
+            Cache::forget('all');
             if (Cache::has('video_categories')) {
                 Cache::forget('video_categories');
                 $a = VideoCategory::all();
@@ -79,6 +80,7 @@ class VideoCategoryController extends Controller
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
                 $cedit->update();
+                Cache::forget('all');
                 if (Cache::has('video_categories')) {
                     Cache::forget('video_categories');
                     $a = VideoCategory::all();
