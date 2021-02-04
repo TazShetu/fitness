@@ -215,11 +215,11 @@ class ApiController extends Controller
             $a = VideoCategory::all();
             foreach ($a as $b) {
                 $sc1s = VideoSubCategoryOne::where('category_id', $b->id)->get();
-                $b['subCategoriesOne'] = $sc1s;
-                foreach ($b['subCategoriesOne'] as $sc1) {
+                $b['goal'] = $sc1s;
+                foreach ($b['goal'] as $sc1) {
                     $sc2s = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->id)->get();
-                    $sc1['subCategoriesTwo'] = $sc2s;
-                    foreach ($sc1['subCategoriesTwo'] as $sc2) {
+                    $sc1['categories'] = $sc2s;
+                    foreach ($sc1['categories'] as $sc2) {
                         $vs = Video::where('sub_category_two_id', $sc2->id)->get();
                         $sc2['videos'] = $vs;
                     }
@@ -228,7 +228,7 @@ class ApiController extends Controller
             Cache::put('all', $a, now()->addMonths(1));
         }
         $responseArray = [];
-        $responseArray['all'] = $a;
+        $responseArray['goals'] = $a;
         if (count($a) == 0) {
             $responseArray['message'] = "Nothing found in Database";
             return response()->json($responseArray, 200);
