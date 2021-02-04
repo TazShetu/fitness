@@ -215,11 +215,11 @@ class ApiController extends Controller
             $a = VideoCategory::all();
             foreach ($a as $b) {
                 $sc1s = VideoSubCategoryOne::where('category_id', $b->id)->get();
-                $b['goal'] = $sc1s;
-                foreach ($b['goal'] as $sc1) {
+                $b['categories'] = $sc1s;
+                foreach ($b['categories'] as $sc1) {
                     $sc2s = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->id)->get();
-                    $sc1['categories'] = $sc2s;
-                    foreach ($sc1['categories'] as $sc2) {
+                    $sc1['subCategories'] = $sc2s;
+                    foreach ($sc1['subCategories'] as $sc2) {
                         $vs = Video::where('sub_category_two_id', $sc2->id)->get();
                         $sc2['videos'] = $vs;
                     }
