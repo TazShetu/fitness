@@ -47,6 +47,7 @@ class VideoSubCategoryTwoController extends Controller
             $sc1->description = $request->description;
             $sc1->save();
             Cache::forget('all');
+            $this->allCache();
             if (Cache::has('video_sub_categories_two'."$sc1->sub_category_one_id")) {
                 Cache::forget('video_sub_categories_two'."$sc1->sub_category_one_id");
                 $a = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->sub_category_one_id)->get();
@@ -100,6 +101,7 @@ class VideoSubCategoryTwoController extends Controller
                 $cedit->description = $request->description;
                 $cedit->update();
                 Cache::forget('all');
+                $this->allCache();
                 if (Cache::has('video_sub_categories_two'."$cedit->sub_category_one_id")) {
                     Cache::forget('video_sub_categories_two'."$cedit->sub_category_one_id");
                     $a = VideoSubCategoryTwo::where('sub_category_one_id', $cedit->sub_category_one_id)->get();

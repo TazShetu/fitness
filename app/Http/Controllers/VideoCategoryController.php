@@ -35,6 +35,7 @@ class VideoCategoryController extends Controller
             $c->description = $request->description;
             $c->save();
             Cache::forget('all');
+            $this->allCache();
             if (Cache::has('video_categories')) {
                 Cache::forget('video_categories');
                 $a = VideoCategory::all();
@@ -81,6 +82,7 @@ class VideoCategoryController extends Controller
                 $cedit->description = $request->description;
                 $cedit->update();
                 Cache::forget('all');
+                $this->allCache();
                 if (Cache::has('video_categories')) {
                     Cache::forget('video_categories');
                     $a = VideoCategory::all();

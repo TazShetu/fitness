@@ -65,6 +65,7 @@ class VideoController extends Controller
             $v->length = $duration_seconds;
             $v->save();
             Cache::forget('all');
+            $this->allCache();
             if (Cache::has('video' . "$v->sub_category_two_id")) {
                 Cache::forget('video' . "$v->sub_category_two_id");
                 $a = Video::where('sub_category_two_id', $v->sub_category_two_id)->get();
@@ -114,6 +115,7 @@ class VideoController extends Controller
             unlink($v->video);
             $v->delete();
             Cache::forget('all');
+            $this->allCache();
             if (Cache::has('video' . "$vsc2id")) {
                 Cache::forget('video' . "$vsc2id");
                 $a = Video::where('sub_category_two_id', $vsc2id)->get();
@@ -152,6 +154,7 @@ class VideoController extends Controller
             $v->calorie = $request->calorie;
             $v->update();
             Cache::forget('all');
+            $this->allCache();
             if (Cache::has('video' . "$v->sub_category_two_id")) {
                 Cache::forget('video' . "$v->sub_category_two_id");
                 $a = Video::where('sub_category_two_id', $v->sub_category_two_id)->get();
