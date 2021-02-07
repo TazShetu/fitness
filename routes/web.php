@@ -8,6 +8,7 @@ use App\Http\Controllers\VideoSubCategoryOneController;
 use App\Http\Controllers\VideoSubCategoryTwoController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\MusicController;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +31,15 @@ Route::get('/refresh', function () {
     return redirect()->back();
 })->name('back');
 
-//Route::get('/test', function () {
-//    return view('test/test');
-//});
+//Route::get('/test', [ACLController::class, 'test']);
+
 //Route::get('/testlogout', function () {
 //    return view('test/testout');
 //});
+Route::get('/cl', function () {
+    Cache::flush();
+    die('Cache Cleared');
+});
 
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
