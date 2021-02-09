@@ -51,7 +51,7 @@ class VideoController extends Controller
             $v->calorie = $request->calorie;
 
             $img = $request->video;
-            $img_name = time() . urlencode(str_replace(" ", "_", $img->getClientOriginalName()));
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
             $a = $img->move('uploads/videos', $img_name);
             $d = 'uploads/videos/' . $img_name;
             $v->video = $d;

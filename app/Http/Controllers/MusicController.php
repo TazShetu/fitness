@@ -34,7 +34,7 @@ class MusicController extends Controller
             $v->title = $request->title;
 
             $img = $request->music;
-            $img_name = time() . urlencode(str_replace(" ", "_", $img->getClientOriginalName()));
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
             $a = $img->move('uploads/music', $img_name);
             $d = 'uploads/music/' . $img_name;
             $v->music = $d;
