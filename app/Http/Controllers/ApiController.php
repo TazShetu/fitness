@@ -10,6 +10,7 @@ use App\Models\VideoSubCategoryTwo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Passport;
 
@@ -35,15 +36,20 @@ class ApiController extends Controller
         } elseif (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password])) {
             $user = Auth::user();
             if ($user->is_app == 1) {
+
+//            $id = $user->id;
+//            DB::delete(DB::raw("DELETE FROM oauth_access_tokens WHERE user_id = '$id'"));
+
+
                 $responseArray = [];
 //            Passport::personalAccessTokensExpireIn(now()->addHour(1));
 //            Passport::personalAccessTokensExpireIn(now()->addWeeks(1));
 //            Passport::personalAccessTokensExpireIn(now()->addMonths(1));
-                Passport::personalAccessTokensExpireIn(now()->addDays(365));
+                Passport::personalAccessTokensExpireIn(now()->addDays(30));
 
 //                $responseArray['token'] = $user->createToken('userToken', ['user'])->accessToken;
                 $responseArray['token'] = $user->createToken('userToken')->accessToken;
-                $responseArray['expire'] = "365 days from now";
+                $responseArray['expire'] = "30";
 
                 return response()->json($responseArray, 200);
             } else {
@@ -138,7 +144,7 @@ class ApiController extends Controller
                     'error' => 'Wrong Sub Category One Id provided in the endpoint'
                 ], 404);
             }
-        }else {
+        } else {
             return response()->json([
                 'error' => 'Wrong Category Id provided in the endpoint'
             ], 404);
@@ -159,7 +165,7 @@ class ApiController extends Controller
                         $a = Cache::get('video' . "$sc2id");
                     } else {
                         $a = Video::where('category_id', $cid)->where('sub_category_one_id', $sc1id)
-                                                                        ->where('sub_category_two_id', $sc2id)->get();
+                            ->where('sub_category_two_id', $sc2id)->get();
                         Cache::put('video' . "$sc2id", $a, now()->addMonths(1));
                     }
                     $responseArray = [];
@@ -180,7 +186,7 @@ class ApiController extends Controller
                     'error' => 'Wrong Sub Category One Id provided in the endpoint'
                 ], 404);
             }
-        }else {
+        } else {
             return response()->json([
                 'error' => 'Wrong Category Id provided in the endpoint'
             ], 404);
