@@ -38,6 +38,7 @@ class VideoSubCategoryTwoController extends Controller
             $request->validate([
                 'sub_category_id' => 'required',
                 'name' => 'required',
+                'thumb_img' => 'required|file',
             ]);
             $sc1 = new VideoSubCategoryTwo;
             $cid = VideoSubCategoryOne::find($request->sub_category_id)->category_id;
@@ -45,6 +46,11 @@ class VideoSubCategoryTwoController extends Controller
             $sc1->sub_category_one_id = $request->sub_category_id;
             $sc1->name = $request->name;
             $sc1->description = $request->description;
+            $img = $request->thumb_img;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages', $img_name);
+            $d = 'uploads/thumbImages/' . $img_name;
+            $sc1->thumb_img = $d;
             $sc1->save();
             Cache::forget('all');
             $this->allCache();
@@ -99,6 +105,14 @@ class VideoSubCategoryTwoController extends Controller
                 $cedit->sub_category_one_id = $request->sub_category_id;
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
+                if ($request->hasFile('thumb_img')) {
+                    unlink($cedit->thumb_img);
+                    $img = $request->thumb_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages', $img_name);
+                    $d = 'uploads/thumbImages/' . $img_name;
+                    $cedit->thumb_img = $d;
+                }
                 $cedit->update();
                 Cache::forget('all');
                 $this->allCache();

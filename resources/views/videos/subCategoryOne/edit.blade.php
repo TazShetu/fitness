@@ -26,7 +26,7 @@
                 </div>
                 {{--     Form Start              --}}
                 <form action="{{route('video.sub.category.one.update', ['cid' => $scOneedit->id])}}" class="form-horizontal"
-                      method="post">
+                      method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
                         <div class="form-group">
@@ -59,6 +59,21 @@
                                 @endif
                                 <small class="help-block">Duplicate entry is not allowed*</small>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($scOneedit->thumb_img)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img">
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Description</label>
@@ -97,6 +112,7 @@
                             <th>Category</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Thumb</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -107,6 +123,9 @@
                                 <td>{{$c->category_name}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
+                                <td>
+                                    <img src="{{asset($c->thumb_img)}}" width="50" height="50">
+                                </td>
                                 <td>
                                     @if($c->id != $scOneedit->id)
                                         <a href="{{route('video.sub.category.one.edit', ['cid' => $c->id])}}"

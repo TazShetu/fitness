@@ -21,7 +21,7 @@ class VideoSubCategoryOneController extends Controller
                 $sb['category_name'] = VideoCategory::find($sb->category_id)->name;
             }
             $categories = VideoCategory::all();
-            return view('videos.subCategoryOne.index', compact('subCategoriesOne','categories'));
+            return view('videos.subCategoryOne.index', compact('subCategoriesOne', 'categories'));
         } else {
             abort(403);
         }
@@ -34,18 +34,24 @@ class VideoSubCategoryOneController extends Controller
             $request->validate([
                 'category_id' => 'required',
                 'name' => 'required',
+                'thumb_img' => 'required|file',
             ]);
             $sc1 = new VideoSubCategoryOne;
             $sc1->category_id = $request->category_id;
             $sc1->name = $request->name;
             $sc1->description = $request->description;
+            $img = $request->thumb_img;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages', $img_name);
+            $d = 'uploads/thumbImages/' . $img_name;
+            $sc1->thumb_img = $d;
             $sc1->save();
             Cache::forget('all');
             $this->allCache();
-            if (Cache::has('video_sub_categories_one'."$sc1->category_id")) {
-                Cache::forget('video_sub_categories_one'."$sc1->category_id");
+            if (Cache::has('video_sub_categories_one' . "$sc1->category_id")) {
+                Cache::forget('video_sub_categories_one' . "$sc1->category_id");
                 $a = VideoSubCategoryOne::where('category_id', $sc1->category_id)->get();
-                Cache::put('video_sub_categories_one'."$sc1->category_id", $a, now()->addMonths(1));
+                Cache::put('video_sub_categories_one' . "$sc1->category_id", $a, now()->addMonths(1));
             }
             Session::flash('success', "The Video Sub Category One has been created successfully.");
             return redirect()->back();
@@ -87,13 +93,21 @@ class VideoSubCategoryOneController extends Controller
                 $cedit->category_id = $request->category_id;
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
+                if ($request->hasFile('thumb_img')) {
+                    unlink($cedit->thumb_img);
+                    $img = $request->thumb_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages', $img_name);
+                    $d = 'uploads/thumbImages/' . $img_name;
+                    $cedit->thumb_img = $d;
+                }
                 $cedit->update();
                 Cache::forget('all');
                 $this->allCache();
-                if (Cache::has('video_sub_categories_one'."$cedit->category_id")) {
-                    Cache::forget('video_sub_categories_one'."$cedit->category_id");
+                if (Cache::has('video_sub_categories_one' . "$cedit->category_id")) {
+                    Cache::forget('video_sub_categories_one' . "$cedit->category_id");
                     $a = VideoSubCategoryOne::where('category_id', $cedit->category_id)->get();
-                    Cache::put('video_sub_categories_one'."$cedit->category_id", $a, now()->addMonths(1));
+                    Cache::put('video_sub_categories_one' . "$cedit->category_id", $a, now()->addMonths(1));
                 }
                 Session::flash('success', "The Video Sub Category One has been updated successfully.");
                 return redirect()->back();

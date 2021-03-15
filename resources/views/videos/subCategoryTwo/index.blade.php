@@ -24,7 +24,8 @@
                     <h3 class="panel-title">Video Sub Category Two Create</h3>
                 </div>
                 {{--     Form Start              --}}
-                <form action="{{route('video.sub.category.two.store')}}" class="form-horizontal" method="post">
+                <form action="{{route('video.sub.category.two.store')}}" class="form-horizontal" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
                         <div class="form-group">
@@ -56,6 +57,15 @@
                                     <span class="help-block text-danger">{{$errors->first('name')}}</span>
                                 @endif
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img" required>
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Description</label>
@@ -94,6 +104,7 @@
                             <th>Category _ Sub Category</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Thumb</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -104,6 +115,9 @@
                                 <td>{{$c->category_name}} _ {{$c->sub_category_name}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
+                                <td>
+                                    <img src="{{asset($c->thumb_img)}}" width="50" height="50">
+                                </td>
                                 <td>
                                     <a href="{{route('video.sub.category.two.edit', ['cid' => $c->id])}}"
                                        class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>

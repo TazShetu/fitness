@@ -11,7 +11,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -29,8 +28,7 @@ class Controller extends BaseController
                 foreach ($sc1['subCategories'] as $sc2) {
                     $sc2id = $sc2->id;
                     $vs = Video::where('sub_category_two_id', $sc2id)->get();
-                    $tc = DB::select(DB::raw("SELECT SUM(calorie) as tc FROM videos WHERE sub_category_two_id = '$sc2id'"));
-                    $sc2['totalCalories'] = round($tc[0]->tc, 2);
+                    $sc2['totalCalories'] = round($vs->sum('calorie'), 2);
                     $sc2['videos'] = $vs;
                 }
             }
