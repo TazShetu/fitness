@@ -39,6 +39,7 @@ class VideoController extends Controller
                 'title' => 'required',
                 'instruction' => 'required',
                 'calorie' => 'required|min:0.01',
+                'thumb_img' => 'required|file',
                 'video' => 'required|file',
             ]);
             $v = new Video;
@@ -49,7 +50,11 @@ class VideoController extends Controller
             $v->title = $request->title;
             $v->instruction = $request->instruction;
             $v->calorie = $request->calorie;
-
+            $imgT = $request->thumb_img;
+            $img_name = time() . str_replace(" ", "_", $imgT->getClientOriginalName());
+            $a = $imgT->move('uploads/thumbImages/Videos', $img_name);
+            $d = 'uploads/thumbImages/Videos/' . $img_name;
+            $v->thumb_img = $d;
             $img = $request->video;
             $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
             $a = $img->move('uploads/videos', $img_name);
@@ -112,6 +117,7 @@ class VideoController extends Controller
         if (Auth::user()->isAbleTo('video')) {
             $v = Video::find($vid);
             $vsc2id = $v->sub_category_two_id;
+            unlink($v->thumb_img);
             unlink($v->video);
             $v->delete();
             Cache::forget('all');

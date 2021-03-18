@@ -107,6 +107,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img" required>
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Video</label>
                             <div class="col-md-6 col-xs-12">
                                 <input type="file" name="video" required>

@@ -19,6 +19,7 @@ class CreateVideosTable extends Migration
             $table->text('instruction');
             $table->string('video')->unique();
             $table->float('calorie');
+            $table->string('thumb_img');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('video_categories')

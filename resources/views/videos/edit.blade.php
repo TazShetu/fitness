@@ -73,6 +73,15 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <small class="help-block">* Please delete and re upload to update Thumb Image and
+                                        Video *</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-footer">
                         <a href="{{route('video.list')}}" class="btn btn-default">Back</a>
