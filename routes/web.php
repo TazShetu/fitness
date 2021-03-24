@@ -31,7 +31,7 @@ Route::get('/refresh', function () {
     return redirect()->back();
 })->name('back');
 
-//Route::get('/test', [ACLController::class, 'test']);
+Route::get('/test', [ACLController::class, 'test']);
 
 //Route::get('/testlogout', function () {
 //    return view('test/testout');

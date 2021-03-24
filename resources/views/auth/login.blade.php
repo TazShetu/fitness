@@ -21,7 +21,8 @@
     <div class="login-box animated fadeInDown">
         <div>
             <h1 class="text-center text-light">
-                <a href="{{url('/')}}" style="text-decoration: none !important; color: inherit !important;">Twinbit Limited</a>
+                <a href="{{url('/')}}" style="text-decoration: none !important; color: inherit !important;">Twinbit
+                    Limited</a>
             </h1>
         </div>
         <div class="login-body">
@@ -65,10 +66,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-{{--                    <div class="col-md-6">--}}
-{{--                        <a href="{{ route('password.request') }}" class="btn btn-link btn-block">Forgot your--}}
-{{--                            password?</a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-md-6">--}}
+                    {{--                        <a href="{{ route('password.request') }}" class="btn btn-link btn-block">Forgot your--}}
+                    {{--                            password?</a>--}}
+                    {{--                    </div>--}}
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-info btn-block">Log In</button>
                     </div>
@@ -83,17 +84,14 @@
     </div>
 
 </div>
-
+<script type="text/javascript">
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 {{--<x-guest-layout>--}}
