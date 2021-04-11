@@ -30,6 +30,12 @@ class Controller extends BaseController
                     $vs = Video::where('sub_category_two_id', $sc2id)->get();
                     $sc2['totalCalories'] = round($vs->sum('calorie'), 2);
                     $sc2['totalLength'] = round($vs->sum('length'), 0);
+
+                    foreach ($vs as $v) {
+
+                    }
+
+
                     $sc2['videos'] = $vs;
                 }
             }

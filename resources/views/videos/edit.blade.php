@@ -1,8 +1,8 @@
 @extends('layouts.joli')
 @section('title', 'Video Edit')
-@section('link')
-    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-@endsection
+{{--@section('link')--}}
+{{--    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>--}}
+{{--@endsection--}}
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li href="{{route('video.list')}}">Video List</li>
@@ -46,20 +46,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Instruction</label>
-                            <div class="col-md-6 col-xs-12">
-                                <textarea class="form-control" rows="5" name="instruction" required>
-                                    {!! $vedit->instruction !!}
-                                </textarea>
-                                <script>
-                                    CKEDITOR.replace('instruction');
-                                </script>
-                            </div>
-                            @if($errors->has('instruction'))
-                                <span class="help-block text-danger">{{$errors->first('instruction')}}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Calorie</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
@@ -71,6 +57,118 @@
                                 @if($errors->has('calorie'))
                                     <span class="help-block text-danger">{{$errors->first('calorie')}}</span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Title*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" name="instruction_title" required
+                                           value="{{$vedit->instruction_title}}"
+                                           class="form-control {{$errors->has('instruction_title') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('instruction_title'))
+                                    <span class="help-block text-danger">{{$errors->first('instruction_title')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction One*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction One" name="instructions[]" required
+                                           class="form-control {{$errors->has('instructions') ? 'is-invalid' : ''}}"
+                                           value="{{$vedit->instructions[0]->instruction}}">
+                                </div>
+                                @if($errors->has('instructions'))
+                                    <span class="help-block text-danger">{{$errors->first('instructions')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Two</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Two" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 1)
+                                           value="{{$vedit->instructions[1]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Three</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Three" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 2)
+                                           value="{{$vedit->instructions[2]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Four</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Four" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 3)
+                                           value="{{$vedit->instructions[3]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Five</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Five" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 4)
+                                           value="{{$vedit->instructions[4]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Six</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Six" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 5)
+                                           value="{{$vedit->instructions[5]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Seven</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Seven" name="instructions[]"
+                                           class="form-control"
+                                           @if(count($vedit->instructions) > 6)
+                                           value="{{$vedit->instructions[6]->instruction}}"
+                                        @endif
+                                    >
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

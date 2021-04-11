@@ -16,7 +16,7 @@ class CreateVideosTable extends Migration
             $table->unsignedBigInteger('sub_category_two_id')->index();
             $table->string('title');
             $table->float('length');
-            $table->text('instruction');
+            $table->string('instruction_title');
             $table->string('video')->unique();
             $table->float('calorie');
             $table->string('thumb_img');
