@@ -24,7 +24,8 @@
                     <h3 class="panel-title">Video Sub Category One Create</h3>
                 </div>
                 {{--     Form Start              --}}
-                <form action="{{route('video.sub.category.one.store')}}" class="form-horizontal" method="post">
+                <form action="{{route('video.sub.category.one.store')}}" class="form-horizontal" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
                         <div class="form-group">
@@ -57,11 +58,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img" required>
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Description</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Sub Category One Description" name="description"
+                                    <input type="text" placeholder="Video Sub Category One Description"
+                                           name="description"
                                            value="{{old('description')}}"
                                            class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
                                 </div>
@@ -93,6 +104,7 @@
                             <th>Category</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Thumb</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -104,9 +116,13 @@
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
                                 <td>
+                                    <img src="{{asset($c->thumb_img)}}" width="50" height="50">
+                                </td>
+                                <td>
                                     <a href="{{route('video.sub.category.one.edit', ['cid' => $c->id])}}"
                                        class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
-                                    <form action="{{route('video.sub.category.one.delete', ['cid' => $c->id])}}" method="POST"
+                                    <form action="{{route('video.sub.category.one.delete', ['cid' => $c->id])}}"
+                                          method="POST"
                                           style="display: inline-table;">
                                         @method('DELETE')
                                         @csrf

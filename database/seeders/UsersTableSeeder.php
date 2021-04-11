@@ -26,8 +26,8 @@ class UsersTableSeeder extends Seeder
         ]);
         User::create([
             'name' => 'General User App',
-            'user_name' => 'general_user',
-            'password' => bcrypt('123456asdf'),
+            'email' => 'general_user@gmail.com',
+            'password' => bcrypt('123456Asdf'),
             'is_app' => 1,
         ]);
     }

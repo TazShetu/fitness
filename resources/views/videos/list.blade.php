@@ -35,6 +35,7 @@
                             <th>Instruction</th>
                             <th>Action</th>
                             <th>Thumb</th>
+                            <th>Video</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,6 +62,9 @@
                                             <i class="fa fa-trash-o"></i>
                                         </button>
                                     </form>
+                                </td>
+                                <td>
+                                    <img src="{{asset($v->thumb_img)}}" width="70" height="70">
                                 </td>
                                 <td>
                                     <video width="144" height="108" controls>

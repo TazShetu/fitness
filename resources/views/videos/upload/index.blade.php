@@ -1,8 +1,8 @@
 @extends('layouts.joli')
 @section('title', 'Video Upload')
-@section('link')
-    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-@endsection
+{{--@section('link')--}}
+{{--    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>--}}
+{{--@endsection--}}
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="active">Video Upload</li>
@@ -31,7 +31,7 @@
                     @csrf
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Category _ Sub Category</label>
+                            <label class="col-md-3 col-xs-12 control-label">Category _ Sub Category*</label>
                             <div class="col-md-6 col-xs-12">
                                 <select class="form-control" name="sub_category_one_id" required id="SubCategory">
                                     <option selected disabled hidden value="">Choose...</option>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Sub Category Two</label>
+                            <label class="col-md-3 col-xs-12 control-label">Sub Category Two*</label>
                             <div class="col-md-6 col-xs-12">
                                 <select class="form-control" name="sub_category_two_id" required id="SubCategory2">
                                     <option selected disabled hidden value="" id="SubCategoryC">Choose...</option>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Title</label>
+                            <label class="col-md-3 col-xs-12 control-label">Title*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -80,20 +80,20 @@
                                 @endif
                             </div>
                         </div>
+                        {{--                        <div class="form-group">--}}
+                        {{--                            <label class="col-md-3 col-xs-12 control-label">Instruction</label>--}}
+                        {{--                            <div class="col-md-6 col-xs-12">--}}
+                        {{--                                <textarea class="form-control" rows="5" name="instruction" required></textarea>--}}
+                        {{--                                <script>--}}
+                        {{--                                    CKEDITOR.replace('instruction');--}}
+                        {{--                                </script>--}}
+                        {{--                            </div>--}}
+                        {{--                            @if($errors->has('instruction'))--}}
+                        {{--                                <span class="help-block text-danger">{{$errors->first('instruction')}}</span>--}}
+                        {{--                            @endif--}}
+                        {{--                        </div>--}}
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Instruction</label>
-                            <div class="col-md-6 col-xs-12">
-                                <textarea class="form-control" rows="5" name="instruction" required></textarea>
-                                <script>
-                                    CKEDITOR.replace('instruction');
-                                </script>
-                            </div>
-                            @if($errors->has('instruction'))
-                                <span class="help-block text-danger">{{$errors->first('instruction')}}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Calorie</label>
+                            <label class="col-md-3 col-xs-12 control-label">Calorie*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -107,13 +107,109 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Video</label>
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img" required>
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Video*</label>
                             <div class="col-md-6 col-xs-12">
                                 <input type="file" name="video" required>
                             </div>
                             @if($errors->has('video'))
                                 <span class="help-block text-danger">{{$errors->first('video')}}</span>
                             @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Title*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Title" name="instruction_title" required
+                                           value="{{old('instruction_title')}}"
+                                           class="form-control {{$errors->has('instruction_title') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('instruction_title'))
+                                    <span class="help-block text-danger">{{$errors->first('instruction_title')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction One*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction One" name="instructions[]" required
+                                           class="form-control {{$errors->has('instructions') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('instructions'))
+                                    <span class="help-block text-danger">{{$errors->first('instructions')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Two</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Two" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Three</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Three" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Four</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Four" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Five</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Five" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Six</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Six" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Instruction Seven</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Instruction Seven" name="instructions[]"
+                                           class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-footer">

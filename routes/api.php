@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Middleware\AuthBasic;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,10 @@ Route::get('/v1/category/{cid}/sub_category_one/{scid}/sub_category_two', [ApiCo
     ->middleware(['auth:api']);
 Route::get('/v1/category/{cid}/sub_category_one/{sc1id}/sub_category_two/{sc2id}/videos', [ApiController::class, 'getVideosFromSidTwo'])
     ->middleware(['auth:api']);
-Route::get('/v1/music', [ApiController::class, 'getMusic'])->middleware(['auth:api']);
-
-Route::get('/v1/all', [ApiController::class, 'all'])->middleware(['auth:api']);
+//Route::get('/v1/music', [ApiController::class, 'getMusic'])->middleware(['auth:api']);
+//Route::get('/v1/all', [ApiController::class, 'all'])->middleware(['auth:api']);
+Route::get('/v1/all', [ApiController::class, 'all'])->middleware([AuthBasic::class]);
+Route::get('/v1/music', [ApiController::class, 'getMusic'])->middleware([AuthBasic::class]);
 
 
 

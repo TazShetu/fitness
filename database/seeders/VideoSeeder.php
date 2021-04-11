@@ -34,6 +34,7 @@ class VideoSeeder extends Seeder
                 $c = new VideoSubCategoryOne;
                 $c->category_id = $vc->id;
                 $c->name = $vsc[0];
+                $c->thumb_img = "uploads/thumbImages/1.png";
                 $c->save();
             }
         }
@@ -44,6 +45,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 1;
             $c->sub_category_one_id = 1;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -53,6 +55,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 1;
             $c->sub_category_one_id = 2;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -62,6 +65,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 1;
             $c->sub_category_one_id = 3;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -71,6 +75,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 2;
             $c->sub_category_one_id = 4;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -80,6 +85,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 2;
             $c->sub_category_one_id = 5;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -89,6 +95,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 2;
             $c->sub_category_one_id = 6;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -98,6 +105,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 3;
             $c->sub_category_one_id = 7;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -107,6 +115,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 3;
             $c->sub_category_one_id = 8;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
@@ -116,6 +125,7 @@ class VideoSeeder extends Seeder
             $c->category_id = 3;
             $c->sub_category_one_id = 9;
             $c->name = $cs;
+            $c->thumb_img = "uploads/thumbImages/2.png";
             $c->save();
         }
 
