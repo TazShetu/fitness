@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use App\Models\VideoCategory;
+use App\Models\VideoInstructions;
 use App\Models\VideoSubCategoryOne;
 use App\Models\VideoSubCategoryTwo;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -30,12 +31,9 @@ class Controller extends BaseController
                     $vs = Video::where('sub_category_two_id', $sc2id)->get();
                     $sc2['totalCalories'] = round($vs->sum('calorie'), 2);
                     $sc2['totalLength'] = round($vs->sum('length'), 0);
-
                     foreach ($vs as $v) {
-
+                        $v['instructions'] = VideoInstructions::where('video_id', $v->id)->get();
                     }
-
-
                     $sc2['videos'] = $vs;
                 }
             }
