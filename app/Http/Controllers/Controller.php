@@ -25,17 +25,23 @@ class Controller extends BaseController
             $b['categories'] = $sc1s;
             foreach ($b['categories'] as $sc1) {
                 $sc2s = VideoSubCategoryTwo::where('sub_category_one_id', $sc1->id)->get();
-                $sc1['subCategories'] = $sc2s;
-                foreach ($sc1['subCategories'] as $sc2) {
+                $totalCaloriesCategory = 0;
+                $totalLengthCategory = 0;
+                foreach ($sc2s as $sc2) {
                     $sc2id = $sc2->id;
                     $vs = Video::where('sub_category_two_id', $sc2id)->get();
                     $sc2['totalCalories'] = round($vs->sum('calorie'), 2);
+                    $totalCaloriesCategory = $totalCaloriesCategory + $sc2['totalCalories'];
                     $sc2['totalLength'] = round($vs->sum('length'), 0);
+                    $totalLengthCategory = $totalLengthCategory + $sc2['totalLength'];
                     foreach ($vs as $v) {
                         $v['instructions'] = VideoInstructions::where('video_id', $v->id)->get();
                     }
                     $sc2['videos'] = $vs;
                 }
+                $sc1['totalCalories'] = $totalCaloriesCategory;
+                $sc1['totalLength'] = $totalLengthCategory;
+                $sc1['subCategories'] = $sc2s;
             }
         }
         Cache::put('all', $a, now()->addMonths(1));
