@@ -46,6 +46,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 1;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -56,6 +57,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 2;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -66,6 +68,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 3;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -76,6 +79,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 4;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -86,6 +90,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 5;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -96,6 +101,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 6;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -106,6 +112,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 7;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -116,6 +123,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 8;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -126,6 +134,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 9;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
