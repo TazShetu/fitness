@@ -106,7 +106,7 @@ class VideoSubCategoryTwoController extends Controller
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
                 if ($request->hasFile('thumb_img')) {
-                    unlink($cedit->thumb_img);
+//                    unlink($cedit->thumb_img);
                     $img = $request->thumb_img;
                     $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
                     $a = $img->move('uploads/thumbImages', $img_name);
