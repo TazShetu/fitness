@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class VideoController extends Controller
@@ -118,6 +119,8 @@ class VideoController extends Controller
                 $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
                 $cName = VideoCategory::find($v->category_id)->name;
                 $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
+                $v['size'] = number_format((float)((File::size(public_path($v->video))) / 1024 / 1024), 3, '.', '');
+//                $v['size'] = number_format((float)((File::size("/home3/twinbit/api.twinbit.net/fitness/".$v->video)) / 1024 / 1024), 3, '.', '');
             }
             return view('videos.list', compact('videos'));
         } else {

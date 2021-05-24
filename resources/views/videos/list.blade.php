@@ -31,6 +31,7 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Length</th>
+                            <th>Size(MB)</th>
                             <th>Calorie</th>
                             <th>Instruction</th>
                             <th>Action</th>
@@ -44,7 +45,8 @@
                                 <th scope="row">{{$i + 1}}</th>
                                 <td>{{$v->category_name}}</td>
                                 <td>{{$v->title}}</td>
-                                <td>{{$v->length}}</td>
+                                <td>{{$v->length}}s</td>
+                                <td>{{$v->size}}</td>
                                 <td>{{$v->calorie}}</td>
                                 <td>{!! $v->instruction !!}</td>
                                 <td>
