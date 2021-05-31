@@ -29,6 +29,7 @@ class MusicController extends Controller
             $request->validate([
                 'title' => 'required',
                 'music' => 'required|file',
+                'thumb_img' => 'required|file',
             ]);
             $v = new Music;
             $v->title = $request->title;
@@ -46,8 +47,12 @@ class MusicController extends Controller
             // Get the duration in seconds, e.g.: 277 (seconds)
             $duration_seconds = $music_file['playtime_seconds'];
             $v->length = $duration_seconds;
+            $imgT = $request->thumb_img;
+            $img_name = time() . str_replace(" ", "_", $imgT->getClientOriginalName());
+            $a = $imgT->move('uploads/thumbImages/Music', $img_name);
+            $d = 'uploads/thumbImages/Music/' . $img_name;
+            $v->thumb_img = $d;
             $v->save();
-
             if (Cache::has('music')) {
                 Cache::forget('music');
                 $a = Music::all();
@@ -66,6 +71,7 @@ class MusicController extends Controller
         if (Auth::user()->isAbleTo('music')) {
             $v = Music::find($mid);
             unlink($v->music);
+            unlink($v->thumb_img);
             $v->delete();
             if (Cache::has('music')) {
                 Cache::forget('music');
