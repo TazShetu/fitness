@@ -48,8 +48,8 @@ class VideoSubCategoryTwoController extends Controller
             $sc1->description = $request->description;
             $img = $request->thumb_img;
             $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
-            $a = $img->move('uploads/thumbImages', $img_name);
-            $d = 'uploads/thumbImages/' . $img_name;
+            $a = $img->move('uploads/thumbImages/subCategoryTwo', $img_name);
+            $d = 'uploads/thumbImages/subCategoryTwo/' . $img_name;
             $sc1->thumb_img = $d;
             $sc1->save();
             Cache::forget('all');
@@ -106,11 +106,13 @@ class VideoSubCategoryTwoController extends Controller
                 $cedit->name = $request->name;
                 $cedit->description = $request->description;
                 if ($request->hasFile('thumb_img')) {
-//                    unlink($cedit->thumb_img);
+                    if (file_exists($cedit->thumb_img)) {
+                        unlink($cedit->thumb_img);
+                    }
                     $img = $request->thumb_img;
                     $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
-                    $a = $img->move('uploads/thumbImages', $img_name);
-                    $d = 'uploads/thumbImages/' . $img_name;
+                    $a = $img->move('uploads/thumbImages/subCategoryTwo', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryTwo/' . $img_name;
                     $cedit->thumb_img = $d;
                 }
                 $cedit->update();

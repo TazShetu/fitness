@@ -73,8 +73,8 @@ class VideoController extends Controller
                 // Get the duration in seconds, e.g.: 277 (seconds)
                 $duration_seconds = $video_file['playtime_seconds'];
                 $v->length = $duration_seconds;
+                $v->number_loop = round(30 / $duration_seconds);
                 $v->save();
-
                 foreach ($request->instructions as $ins) {
                     if ($ins != null) {
                         $vi = new VideoInstructions;
