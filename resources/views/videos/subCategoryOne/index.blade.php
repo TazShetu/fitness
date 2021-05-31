@@ -67,17 +67,95 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Description</label>
+                            <label class="col-md-3 col-xs-12 control-label">Expected Result*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Sub Category One Description"
-                                           name="description"
-                                           value="{{old('description')}}"
-                                           class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
+                                    <input type="text" placeholder="Instruction Title" name="expected_result" required
+                                           value="{{old('expected_result')}}"
+                                           class="form-control {{$errors->has('expected_result') ? 'is-invalid' : ''}}">
                                 </div>
-                                @if($errors->has('description'))
-                                    <span class="help-block text-danger">{{$errors->first('description')}}</span>
+                                @if($errors->has('expected_result'))
+                                    <span class="help-block text-danger">{{$errors->first('expected_result')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point One*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Bullet Point One" name="bullet_points[]" required
+                                           class="form-control {{$errors->has('bullet_points') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('bullet_points'))
+                                    <span class="help-block text-danger">{{$errors->first('bullet_points')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point Two</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Bullet Point Two" name="bullet_points[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point Three</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Bullet Point Three" name="bullet_points[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="male_img" required>
+                            </div>
+                            @if($errors->has('male_img'))
+                                <span class="help-block text-danger">{{$errors->first('male_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image Description*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Male image description" name="male_image_description" required
+                                           value="{{old('male_image_description')}}"
+                                           class="form-control {{$errors->has('male_image_description') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('male_image_description'))
+                                    <span class="help-block text-danger">{{$errors->first('male_image_description')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="female_img" required>
+                            </div>
+                            @if($errors->has('female_img'))
+                                <span class="help-block text-danger">{{$errors->first('female_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image Description*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="female image description" name="female_image_description" required
+                                           value="{{old('female_image_description')}}"
+                                           class="form-control {{$errors->has('female_image_description') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('female_image_description'))
+                                    <span class="help-block text-danger">{{$errors->first('female_image_description')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -103,7 +181,7 @@
                             <th>#</th>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Expected Result</th>
                             <th>Thumb</th>
                             <th>Action</th>
                         </tr>
@@ -114,7 +192,7 @@
                                 <th scope="row">{{$i + 1}}</th>
                                 <td>{{$c->category_name}}</td>
                                 <td>{{$c->name}}</td>
-                                <td>{{$c->description}}</td>
+                                <td>{{$c->expected_result}}</td>
                                 <td>
                                     <img src="{{asset($c->thumb_img)}}" width="50" height="50">
                                 </td>

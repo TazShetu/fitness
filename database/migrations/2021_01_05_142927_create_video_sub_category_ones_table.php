@@ -14,7 +14,14 @@ class CreateVideoSubCategoryOnesTable extends Migration
             $table->unsignedBigInteger('category_id')->index();
             $table->string('name');
             $table->string('thumb_img');
-            $table->text('description')->nullable();
+            $table->string('expected_result');
+            $table->string('bullet_point_one');
+            $table->string('bullet_point_two')->nullable();
+            $table->string('bullet_point_three')->nullable();
+            $table->string('male_img');
+            $table->string('male_image_description');
+            $table->string('female_img');
+            $table->string('female_image_description');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('video_categories')

@@ -35,6 +35,12 @@ class VideoSeeder extends Seeder
                 $c->category_id = $vc->id;
                 $c->name = $vsc[0];
                 $c->thumb_img = "uploads/thumbImages/1.png";
+                $c->expected_result = "Expected Result";
+                $c->bullet_point_one = "Bullet point one";
+                $c->male_img = "uploads/thumbImages/1.png";
+                $c->male_image_description = "male des";
+                $c->female_img = "uploads/thumbImages/1.png";
+                $c->female_image_description = "female des";
                 $c->save();
             }
         }
