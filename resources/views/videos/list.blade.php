@@ -33,7 +33,7 @@
                             <th>Length</th>
                             <th>Size(MB)</th>
                             <th>Calorie</th>
-                            <th>Instruction</th>
+                            <th>Loop</th>
                             <th>Action</th>
                             <th>Thumb</th>
                             <th>Video</th>
@@ -48,7 +48,7 @@
                                 <td>{{$v->length}}s</td>
                                 <td>{{$v->size}}</td>
                                 <td>{{$v->calorie}}</td>
-                                <td>{!! $v->instruction !!}</td>
+                                <td>{{$v->number_loop}}</td>
                                 <td>
                                     <a href="{{route('video.play', ['vid' => $v->id])}}"
                                        class="btn btn-sm btn-info m-1" target="_blank"><span

@@ -137,6 +137,29 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="male_img_2" required>
+                            </div>
+                            @if($errors->has('male_img_2'))
+                                <span class="help-block text-danger">{{$errors->first('male_img_2')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image Description 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="Male image description" name="male_image_description_2" required
+                                           value="{{old('male_image_description_2')}}"
+                                           class="form-control {{$errors->has('male_image_description_2') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('male_image_description_2'))
+                                    <span class="help-block text-danger">{{$errors->first('male_image_description_2')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Female Image*</label>
                             <div class="col-md-6 col-xs-12">
                                 <input type="file" name="female_img" required>
@@ -156,6 +179,29 @@
                                 </div>
                                 @if($errors->has('female_image_description'))
                                     <span class="help-block text-danger">{{$errors->first('female_image_description')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="female_img_2" required>
+                            </div>
+                            @if($errors->has('female_img_2'))
+                                <span class="help-block text-danger">{{$errors->first('female_img_2')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image Description 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" placeholder="female image description" name="female_image_description_2"
+                                           value="{{old('female_image_description_2')}}" required
+                                           class="form-control {{$errors->has('female_image_description_2') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('female_image_description_2'))
+                                    <span class="help-block text-danger">{{$errors->first('female_image_description_2')}}</span>
                                 @endif
                             </div>
                         </div>

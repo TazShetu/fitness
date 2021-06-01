@@ -41,6 +41,10 @@ class VideoSeeder extends Seeder
                 $c->male_image_description = "male des";
                 $c->female_img = "uploads/thumbImages/1.png";
                 $c->female_image_description = "female des";
+                $c->male_img_2 = "uploads/thumbImages/1.png";
+                $c->male_image_description_2 = "male des 2";
+                $c->female_img_2 = "uploads/thumbImages/1.png";
+                $c->female_image_description_2 = "female des 2";
                 $c->save();
             }
         }
