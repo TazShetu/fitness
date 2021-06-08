@@ -113,13 +113,14 @@ class VideoController extends Controller
     public function listVideo()
     {
         if (Auth::user()->isAbleTo('video')) {
-            $videos = Video::all();
+//            $videos = Video::all();
+            $videos = Video::orderBy('id', 'DESC')->paginate(5);
             foreach ($videos as $v) {
                 $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
                 $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
                 $cName = VideoCategory::find($v->category_id)->name;
                 $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
-                $v['size'] = number_format((float)((File::size(public_path($v->video))) / 1024 / 1024), 3, '.', '');
+//                $v['size'] = number_format((float)((File::size(public_path($v->video))) / 1024 / 1024), 3, '.', '');
 //                $v['size'] = number_format((float)((File::size("/home3/twinbit/api.twinbit.net/fitness/".$v->video)) / 1024 / 1024), 3, '.', '');
             }
             return view('videos.list', compact('videos'));

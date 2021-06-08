@@ -16,7 +16,7 @@ class VideoSubCategoryTwoController extends Controller
     public function index()
     {
         if (Auth::user()->isAbleTo('video_sub_category_two')) {
-            $subCategoriesTwo = VideoSubCategoryTwo::all();
+            $subCategoriesTwo = VideoSubCategoryTwo::orderBy('id', 'DESC')->paginate(5);
             foreach ($subCategoriesTwo as $sb) {
                 $sb['category_name'] = VideoCategory::find($sb->category_id)->name;
                 $sb['sub_category_name'] = VideoSubCategoryOne::find($sb->sub_category_one_id)->name;

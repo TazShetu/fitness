@@ -31,22 +31,22 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Length</th>
-                            <th>Size(MB)</th>
+{{--                            <th>Size(MB)</th>--}}
                             <th>Calorie</th>
                             <th>Loop</th>
                             <th>Action</th>
                             <th>Thumb</th>
-                            <th>Video</th>
+{{--                            <th>Video</th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($videos as $i => $v)
                             <tr>
-                                <th scope="row">{{$i + 1}}</th>
+                                <th scope="row">{{$videos->firstItem() + $i}}</th>
                                 <td>{{$v->category_name}}</td>
                                 <td>{{$v->title}}</td>
                                 <td>{{$v->length}}s</td>
-                                <td>{{$v->size}}</td>
+{{--                                <td>{{$v->size}}</td>--}}
                                 <td>{{$v->calorie}}</td>
                                 <td>{{$v->number_loop}}</td>
                                 <td>
@@ -68,15 +68,19 @@
                                 <td>
                                     <img src="{{asset($v->thumb_img)}}" width="70" height="70">
                                 </td>
-                                <td>
-                                    <video width="144" height="108" controls>
-                                        <source src="{{URL::asset("$v->video")}}" type="video/mp4">
-                                    </video>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <video width="144" height="108" controls>--}}
+{{--                                        <source src="{{URL::asset("$v->video")}}" type="video/mp4">--}}
+{{--                                    </video>--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="panel-footer">
+                    {{$videos->onEachSide(5)->links()}}
+                    <span>Showing {{$videos->firstItem()}} - {{$videos->lastItem()}} of {{$videos->total()}}</span>
                 </div>
             </div>
         </div>
