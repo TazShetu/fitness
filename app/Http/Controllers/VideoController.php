@@ -130,6 +130,24 @@ class VideoController extends Controller
     }
 
 
+    public function listTitleVideo()
+    {
+        if (Auth::user()->isAbleTo('video')) {
+//            $videos = Video::all();
+            $videos = Video::orderBy('id', 'DESC')->get();
+            foreach ($videos as $v) {
+                $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
+                $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
+                $cName = VideoCategory::find($v->category_id)->name;
+                $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
+            }
+            return view('videos.list_title', compact('videos'));
+        } else {
+            abort(403);
+        }
+    }
+
+
     public function playVideo($vid)
     {
         if (Auth::user()->isAbleTo('video')) {

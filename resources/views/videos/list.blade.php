@@ -22,6 +22,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">All Videos</h3>
+                    <div class="float-right">
+                        <a href="{{route('video.list.title')}}" class="btn btn-primary">All Video Title</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
@@ -80,6 +83,7 @@
                 </div>
                 <div class="panel-footer">
                     {{$videos->onEachSide(5)->links()}}
+{{--                    {{$videos->links()}}--}}
                     <span>Showing {{$videos->firstItem()}} - {{$videos->lastItem()}} of {{$videos->total()}}</span>
                 </div>
             </div>

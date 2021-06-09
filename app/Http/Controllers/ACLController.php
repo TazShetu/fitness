@@ -203,7 +203,21 @@ class ACLController extends Controller
 
     public function test()
     {
+        die('here');
         return view('test');
+    }
+
+
+    public function testPost(Request $request)
+    {
+        die('here');
+        $imgT = $request->thumb_img;
+        $img_name = 'test'.time() . str_replace(" ", "_", $imgT->getClientOriginalName());
+        $a = $imgT->move('uploads/thumbImages/Videos', $img_name);
+        $imgV = $request->video;
+        $img_name = 'test'.time() . str_replace(" ", "_", $imgV->getClientOriginalName());
+        $a = $imgV->move('uploads/thumbImages/Videos', $img_name);
+
     }
 
 

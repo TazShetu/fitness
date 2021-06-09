@@ -32,6 +32,7 @@ Route::get('/refresh', function () {
 })->name('back');
 
 Route::get('/test', [ACLController::class, 'test']);
+Route::post('/test', [ACLController::class, 'testPost'])->name('testPost');
 
 //Route::get('/testlogout', function () {
 //    return view('test/testout');
@@ -106,6 +107,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/videos/upload', [VideoController::class, 'upload'])->name('video.upload');
     Route::post('/videos/upload', [VideoController::class, 'uploadStore'])->name('video.upload.store');
     Route::get('/videos/list', [VideoController::class, 'listVideo'])->name('video.list');
+    Route::get('/videos/title/list', [VideoController::class, 'listTitleVideo'])->name('video.list.title');
     Route::get('/videos/play/{vid}', [VideoController::class, 'playVideo'])->name('video.play');
     Route::delete('/videos/delete/{vid}', [VideoController::class, 'deleteVideo'])->name('video.delete');
     Route::get('/videos/edit/{vid}', [VideoController::class, 'edit'])->name('video.edit');
