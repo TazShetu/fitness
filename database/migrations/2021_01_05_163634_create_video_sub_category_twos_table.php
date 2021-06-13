@@ -15,7 +15,7 @@ class CreateVideoSubCategoryTwosTable extends Migration
             $table->unsignedBigInteger('sub_category_one_id')->index();
             $table->string('name');
             $table->string('thumb_img');
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('video_categories')

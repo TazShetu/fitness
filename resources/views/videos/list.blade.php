@@ -22,6 +22,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">All Videos</h3>
+                    <div class="float-right">
+                        <a href="{{route('video.list.title')}}" class="btn btn-primary">All Video Title</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
@@ -31,22 +34,24 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Length</th>
+{{--                            <th>Size(MB)</th>--}}
                             <th>Calorie</th>
-                            <th>Instruction</th>
+                            <th>Loop</th>
                             <th>Action</th>
                             <th>Thumb</th>
-                            <th>Video</th>
+{{--                            <th>Video</th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($videos as $i => $v)
                             <tr>
-                                <th scope="row">{{$i + 1}}</th>
+                                <th scope="row">{{$videos->firstItem() + $i}}</th>
                                 <td>{{$v->category_name}}</td>
                                 <td>{{$v->title}}</td>
-                                <td>{{$v->length}}</td>
+                                <td>{{$v->length}}s</td>
+{{--                                <td>{{$v->size}}</td>--}}
                                 <td>{{$v->calorie}}</td>
-                                <td>{!! $v->instruction !!}</td>
+                                <td>{{$v->number_loop}}</td>
                                 <td>
                                     <a href="{{route('video.play', ['vid' => $v->id])}}"
                                        class="btn btn-sm btn-info m-1" target="_blank"><span
@@ -66,15 +71,20 @@
                                 <td>
                                     <img src="{{asset($v->thumb_img)}}" width="70" height="70">
                                 </td>
-                                <td>
-                                    <video width="144" height="108" controls>
-                                        <source src="{{URL::asset("$v->video")}}" type="video/mp4">
-                                    </video>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <video width="144" height="108" controls>--}}
+{{--                                        <source src="{{URL::asset("$v->video")}}" type="video/mp4">--}}
+{{--                                    </video>--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="panel-footer">
+                    {{$videos->onEachSide(5)->links()}}
+{{--                    {{$videos->links()}}--}}
+                    <span>Showing {{$videos->firstItem()}} - {{$videos->lastItem()}} of {{$videos->total()}}</span>
                 </div>
             </div>
         </div>

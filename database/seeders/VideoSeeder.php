@@ -35,6 +35,16 @@ class VideoSeeder extends Seeder
                 $c->category_id = $vc->id;
                 $c->name = $vsc[0];
                 $c->thumb_img = "uploads/thumbImages/1.png";
+                $c->expected_result = "Expected Result";
+                $c->bullet_point_one = "Bullet point one";
+                $c->male_img = "uploads/thumbImages/1.png";
+                $c->male_image_description = "male des";
+                $c->female_img = "uploads/thumbImages/1.png";
+                $c->female_image_description = "female des";
+                $c->male_img_2 = "uploads/thumbImages/1.png";
+                $c->male_image_description_2 = "male des 2";
+                $c->female_img_2 = "uploads/thumbImages/1.png";
+                $c->female_image_description_2 = "female des 2";
                 $c->save();
             }
         }
@@ -46,6 +56,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 1;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -56,6 +67,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 2;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -66,6 +78,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 3;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -76,6 +89,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 4;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -86,6 +100,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 5;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -96,6 +111,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 6;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -106,6 +122,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 7;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -116,6 +133,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 8;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 
@@ -126,6 +144,7 @@ class VideoSeeder extends Seeder
             $c->sub_category_one_id = 9;
             $c->name = $cs;
             $c->thumb_img = "uploads/thumbImages/2.png";
+            $c->description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
             $c->save();
         }
 

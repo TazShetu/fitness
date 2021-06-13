@@ -60,6 +60,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($vedit->thumb_img)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Thumb Image</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="thumb_img">
+                            </div>
+                            @if($errors->has('thumb_img'))
+                                <span class="help-block text-danger">{{$errors->first('thumb_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Instruction Title*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">

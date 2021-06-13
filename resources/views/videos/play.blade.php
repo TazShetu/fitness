@@ -24,7 +24,7 @@
                     <h3 class="panel-title">Video</h3>
                 </div>
                 <div class="panel-body">
-                    <video width="1280" height="720" controls>
+                    <video width="1280" height="720" controls loop>
                         <source src="{{URL::asset("$video->video")}}" type="video/mp4">
                     </video>
                 </div>

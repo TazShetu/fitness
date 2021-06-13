@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class VideoController extends Controller
@@ -72,8 +73,8 @@ class VideoController extends Controller
                 // Get the duration in seconds, e.g.: 277 (seconds)
                 $duration_seconds = $video_file['playtime_seconds'];
                 $v->length = $duration_seconds;
+                $v->number_loop = round(30 / $duration_seconds);
                 $v->save();
-
                 foreach ($request->instructions as $ins) {
                     if ($ins != null) {
                         $vi = new VideoInstructions;
@@ -112,14 +113,35 @@ class VideoController extends Controller
     public function listVideo()
     {
         if (Auth::user()->isAbleTo('video')) {
-            $videos = Video::all();
+//            $videos = Video::all();
+            $videos = Video::orderBy('id', 'DESC')->paginate(15);
+            foreach ($videos as $v) {
+                $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
+                $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
+                $cName = VideoCategory::find($v->category_id)->name;
+                $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
+//                $v['size'] = number_format((float)((File::size(public_path($v->video))) / 1024 / 1024), 3, '.', '');
+//                $v['size'] = number_format((float)((File::size("/home3/twinbit/api.twinbit.net/fitness/".$v->video)) / 1024 / 1024), 3, '.', '');
+            }
+            return view('videos.list', compact('videos'));
+        } else {
+            abort(403);
+        }
+    }
+
+
+    public function listTitleVideo()
+    {
+        if (Auth::user()->isAbleTo('video')) {
+//            $videos = Video::all();
+            $videos = Video::orderBy('id', 'DESC')->get();
             foreach ($videos as $v) {
                 $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
                 $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
                 $cName = VideoCategory::find($v->category_id)->name;
                 $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
             }
-            return view('videos.list', compact('videos'));
+            return view('videos.list_title', compact('videos'));
         } else {
             abort(403);
         }
@@ -189,6 +211,16 @@ class VideoController extends Controller
                 $v->title = $request->title;
                 $v->instruction_title = $request->instruction_title;
                 $v->calorie = $request->calorie;
+                if ($request->hasFile('thumb_img')) {
+                    if (file_exists($v->thumb_img)) {
+                        unlink($v->thumb_img);
+                    }
+                    $img = $request->thumb_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/Videos', $img_name);
+                    $d = 'uploads/thumbImages/Videos/' . $img_name;
+                    $v->thumb_img = $d;
+                }
                 $v->update();
                 VideoInstructions::where('video_id', $vid)->delete();
                 foreach ($request->instructions as $ins) {

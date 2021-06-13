@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\Music;
+use Illuminate\Support\Facades\Cache;
 
 class ACLController extends Controller
 {
@@ -203,7 +205,28 @@ class ACLController extends Controller
 
     public function test()
     {
+        die('here');
+        if (Cache::has('music_test')) {
+            die('cache found');
+        } else {
+            $a = Music::all();
+            Cache::put('music_test', $a, now()->addMinute(1));
+            dd($a);
+        }
         return view('test');
+    }
+
+
+    public function testPost(Request $request)
+    {
+        die('here');
+        $imgT = $request->thumb_img;
+        $img_name = 'test'.time() . str_replace(" ", "_", $imgT->getClientOriginalName());
+        $a = $imgT->move('uploads/thumbImages/Videos', $img_name);
+        $imgV = $request->video;
+        $img_name = 'test'.time() . str_replace(" ", "_", $imgV->getClientOriginalName());
+        $a = $imgV->move('uploads/thumbImages/Videos', $img_name);
+
     }
 
 

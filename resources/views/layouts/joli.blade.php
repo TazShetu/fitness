@@ -76,8 +76,11 @@
 <!-- START PLUGINS -->
 {{--<script type="text/javascript" src="{{asset('js/admin.js')}}"></script>--}}
 <script type="text/javascript" src="{{asset('joli/js/plugins/jquery/jquery.min.js')}}"></script>
-<script>
-    $(window).on('load', function () {
+<script type="text/javascript">
+    // $(window).on('load', function () {
+    //     $("#loader").fadeOut("fast");
+    // });
+    $(function() {
         $("#loader").fadeOut("fast");
     });
 </script>

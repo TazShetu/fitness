@@ -14,6 +14,7 @@ class CreateMusicTable extends Migration
             $table->string('title');
             $table->float('length');
             $table->string('music')->unique();
+            $table->string('thumb_img')->unique();
             $table->timestamps();
         });
     }

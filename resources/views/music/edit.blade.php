@@ -20,7 +20,7 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Music Edit</h3>
+                    <h3 class="panel-title">Music Title Edit</h3>
                 </div>
                 {{--     Form Start              --}}
                 <form action="{{route('music.update', ['mid' => $medit->id])}}" class="form-horizontal" method="post"
@@ -63,6 +63,7 @@
                             <th>Title</th>
                             <th>Length</th>
                             <th>Action</th>
+                            <th>Music</th>
                             <th>Thumb</th>
                         </tr>
                         </thead>
@@ -97,6 +98,9 @@
                                     <audio controls>
                                         <source src='{{URL::asset("$m->music")}}' type='audio/mp3'>
                                     </audio>
+                                </td>
+                                <td>
+                                    <img src="{{asset($m->thumb_img)}}" width="70" height="70">
                                 </td>
                             </tr>
                         @endforeach

@@ -72,7 +72,8 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Sub Category Two Description" name="description"
+                                    <input type="text" placeholder="Video Sub Category Two Description"
+                                           name="description"
                                            value="{{old('description')}}"
                                            class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
                                 </div>
@@ -111,7 +112,7 @@
                         <tbody>
                         @foreach($subCategoriesTwo as $i => $c)
                             <tr>
-                                <th scope="row">{{$i + 1}}</th>
+                                <th scope="row">{{$subCategoriesTwo->firstItem() + $i}}</th>
                                 <td>{{$c->category_name}} _ {{$c->sub_category_name}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
@@ -121,7 +122,8 @@
                                 <td>
                                     <a href="{{route('video.sub.category.two.edit', ['cid' => $c->id])}}"
                                        class="btn btn-sm btn-success m-1"><span class="fa fa-pencil"></span></a>
-                                    <form action="{{route('video.sub.category.two.delete', ['cid' => $c->id])}}" method="POST"
+                                    <form action="{{route('video.sub.category.two.delete', ['cid' => $c->id])}}"
+                                          method="POST"
                                           style="display: inline-table;">
                                         @method('DELETE')
                                         @csrf
@@ -135,6 +137,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="panel-footer">
+                    {{$subCategoriesTwo->onEachSide(5)->links()}}
+                    <span>Showing {{$subCategoriesTwo->firstItem()}} - {{$subCategoriesTwo->lastItem()}} of {{$subCategoriesTwo->total()}}</span>
                 </div>
             </div>
         </div>

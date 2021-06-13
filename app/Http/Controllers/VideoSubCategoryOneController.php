@@ -35,16 +35,59 @@ class VideoSubCategoryOneController extends Controller
                 'category_id' => 'required',
                 'name' => 'required',
                 'thumb_img' => 'required|file',
+                'expected_result' => 'required',
+                'bullet_points' => 'required',
+                'male_img' => 'required|file',
+                'male_image_description' => 'required',
+                'female_img' => 'required|file',
+                'female_image_description' => 'required',
+                'male_img_2' => 'required|file',
+                'male_image_description_2' => 'required',
+                'female_img_2' => 'required|file',
+                'female_image_description_2' => 'required',
             ]);
             $sc1 = new VideoSubCategoryOne;
             $sc1->category_id = $request->category_id;
             $sc1->name = $request->name;
-            $sc1->description = $request->description;
             $img = $request->thumb_img;
             $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
-            $a = $img->move('uploads/thumbImages', $img_name);
-            $d = 'uploads/thumbImages/' . $img_name;
+            $a = $img->move('uploads/thumbImages/subCategoryOne', $img_name);
+            $d = 'uploads/thumbImages/subCategoryOne/' . $img_name;
             $sc1->thumb_img = $d;
+            $sc1->expected_result = $request->expected_result;
+            foreach ($request->bullet_points as $i => $bt) {
+                if ($i == 0) {
+                    $sc1->bullet_point_one = $bt;
+                } elseif ($i == 1) {
+                    $sc1->bullet_point_two = $bt;
+                } else {
+                    $sc1->bullet_point_three = $bt;
+                }
+            }
+            $img = $request->male_img;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages/subCategoryOne/Male', $img_name);
+            $d = 'uploads/thumbImages/subCategoryOne/Male/' . $img_name;
+            $sc1->male_img = $d;
+            $sc1->male_image_description = $request->male_image_description;
+            $img = $request->female_img;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages/subCategoryOne/Female', $img_name);
+            $d = 'uploads/thumbImages/subCategoryOne/Female/' . $img_name;
+            $sc1->female_img = $d;
+            $sc1->female_image_description = $request->female_image_description;
+            $img = $request->male_img_2;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages/subCategoryOne/Male', $img_name);
+            $d = 'uploads/thumbImages/subCategoryOne/Male/' . $img_name;
+            $sc1->male_img_2 = $d;
+            $sc1->male_image_description_2 = $request->male_image_description_2;
+            $img = $request->female_img_2;
+            $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+            $a = $img->move('uploads/thumbImages/subCategoryOne/Female', $img_name);
+            $d = 'uploads/thumbImages/subCategoryOne/Female/' . $img_name;
+            $sc1->female_img_2 = $d;
+            $sc1->female_image_description_2 = $request->female_image_description_2;
             $sc1->save();
             Cache::forget('all');
             $this->allCache();
@@ -87,20 +130,82 @@ class VideoSubCategoryOneController extends Controller
             $request->validate([
                 'category_id' => 'required',
                 'name' => 'required',
+                'expected_result' => 'required',
+                'bullet_points' => 'required',
+                'male_image_description' => 'required',
+                'female_image_description' => 'required',
+                'male_image_description_2' => 'required',
+                'female_image_description_2' => 'required',
             ]);
             $cedit = VideoSubCategoryOne::find($cid);
             if ($cedit) {
                 $cedit->category_id = $request->category_id;
                 $cedit->name = $request->name;
-                $cedit->description = $request->description;
+
                 if ($request->hasFile('thumb_img')) {
-                    unlink($cedit->thumb_img);
+                    if (file_exists($cedit->thumb_img)) {
+                        unlink($cedit->thumb_img);
+                    }
                     $img = $request->thumb_img;
                     $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
-                    $a = $img->move('uploads/thumbImages', $img_name);
-                    $d = 'uploads/thumbImages/' . $img_name;
+                    $a = $img->move('uploads/thumbImages/subCategoryOne', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryOne/' . $img_name;
                     $cedit->thumb_img = $d;
                 }
+                $cedit->expected_result = $request->expected_result;
+                foreach ($request->bullet_points as $i => $bt) {
+                    if ($i == 0) {
+                        $cedit->bullet_point_one = $bt;
+                    } elseif ($i == 1) {
+                        $cedit->bullet_point_two = $bt;
+                    } else {
+                        $cedit->bullet_point_three = $bt;
+                    }
+                }
+                if ($request->hasFile('male_img')) {
+                    if (file_exists($cedit->male_img)) {
+                        unlink($cedit->male_img);
+                    }
+                    $img = $request->male_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/subCategoryOne/Male', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryOne/Male/' . $img_name;
+                    $cedit->male_img = $d;
+                }
+                $cedit->male_image_description = $request->male_image_description;
+                if ($request->hasFile('male_img_2')) {
+                    if (file_exists($cedit->male_img_2)) {
+                        unlink($cedit->male_img_2);
+                    }
+                    $img = $request->male_img_2;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/subCategoryOne/Male', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryOne/Male/' . $img_name;
+                    $cedit->male_img_2 = $d;
+                }
+                $cedit->male_image_description_2 = $request->male_image_description_2;
+                if ($request->hasFile('female_img')) {
+                    if (file_exists($cedit->female_img)) {
+                        unlink($cedit->female_img);
+                    }
+                    $img = $request->female_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/subCategoryOne/Female', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryOne/Female/' . $img_name;
+                    $cedit->female_img = $d;
+                }
+                $cedit->female_image_description = $request->female_image_description;
+                if ($request->hasFile('female_img_2')) {
+                    if (file_exists($cedit->female_img_2)) {
+                        unlink($cedit->female_img_2);
+                    }
+                    $img = $request->female_img_2;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/subCategoryOne/Female', $img_name);
+                    $d = 'uploads/thumbImages/subCategoryOne/Female/' . $img_name;
+                    $cedit->female_img_2 = $d;
+                }
+                $cedit->female_image_description_2 = $request->female_image_description_2;
                 $cedit->update();
                 Cache::forget('all');
                 $this->allCache();

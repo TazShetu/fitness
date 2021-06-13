@@ -112,7 +112,7 @@
                             <th>Category _ Sub Category</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Thumb</th>
+{{--                            <th>Thumb</th>--}}
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -123,9 +123,9 @@
                                 <td>{{$c->category_name}} _ {{$c->sub_category_name}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->description}}</td>
-                                <td>
-                                    <img src="{{asset($c->thumb_img)}}" width="50" height="50">
-                                </td>
+{{--                                <td>--}}
+{{--                                    <img src="{{asset($c->thumb_img)}}" width="50" height="50">--}}
+{{--                                </td>--}}
                                 <td>
                                     @if($c->id != $scTwoedit->id)
                                         <a href="{{route('video.sub.category.two.edit', ['cid' => $c->id])}}"

@@ -25,7 +25,8 @@
                     <h3 class="panel-title">Video Sub Category One Edit</h3>
                 </div>
                 {{--     Form Start              --}}
-                <form action="{{route('video.sub.category.one.update', ['cid' => $scOneedit->id])}}" class="form-horizontal"
+                <form action="{{route('video.sub.category.one.update', ['cid' => $scOneedit->id])}}"
+                      class="form-horizontal"
                       method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="panel-body">
@@ -76,16 +77,170 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Description</label>
+                            <label class="col-md-3 col-xs-12 control-label">Expected Result*</label>
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" placeholder="Video Sub Category One Description" name="description"
-                                           value="{{$scOneedit->description}}"
-                                           class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}">
+                                    <input type="text" name="expected_result" required
+                                           value="{{$scOneedit->expected_result}}"
+                                           class="form-control {{$errors->has('expected_result') ? 'is-invalid' : ''}}">
                                 </div>
-                                @if($errors->has('description'))
-                                    <span class="help-block text-danger">{{$errors->first('description')}}</span>
+                                @if($errors->has('expected_result'))
+                                    <span class="help-block text-danger">{{$errors->first('expected_result')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point One*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" value="{{$scOneedit->bullet_point_one}}" name="bullet_points[]"
+                                           required
+                                           class="form-control {{$errors->has('bullet_points') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('bullet_points'))
+                                    <span class="help-block text-danger">{{$errors->first('bullet_points')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point Two</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" value="{{$scOneedit->bullet_point_two}}" name="bullet_points[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Bullet Point Three</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" value="{{$scOneedit->bullet_point_three}}" name="bullet_points[]"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($scOneedit->male_img)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="male_img">
+                            </div>
+                            @if($errors->has('male_img'))
+                                <span class="help-block text-danger">{{$errors->first('male_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image Description*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" value="{{$scOneedit->male_image_description}}"
+                                           name="male_image_description" required
+                                           class="form-control {{$errors->has('male_image_description') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('male_image_description'))
+                                    <span
+                                        class="help-block text-danger">{{$errors->first('male_image_description')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($scOneedit->male_img_2)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="male_img_2">
+                            </div>
+                            @if($errors->has('male_img_2'))
+                                <span class="help-block text-danger">{{$errors->first('male_img_2')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Male Image Description 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" value="{{$scOneedit->male_image_description_2}}"
+                                           name="male_image_description_2" required
+                                           class="form-control {{$errors->has('male_image_description_2') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('male_image_description_2'))
+                                    <span
+                                        class="help-block text-danger">{{$errors->first('male_image_description_2')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($scOneedit->female_img)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="female_img">
+                            </div>
+                            @if($errors->has('female_img'))
+                                <span class="help-block text-danger">{{$errors->first('female_img')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image Description*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" name="female_image_description" required
+                                           value="{{$scOneedit->female_image_description}}"
+                                           class="form-control {{$errors->has('female_image_description') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('female_image_description'))
+                                    <span
+                                        class="help-block text-danger">{{$errors->first('female_image_description')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label"></label>
+                            <div class="col-md-6 col-xs-12">
+                                <img src="{{asset($scOneedit->female_img_2)}}" width="70" height="70">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" name="female_img_2">
+                            </div>
+                            @if($errors->has('female_img_2'))
+                                <span class="help-block text-danger">{{$errors->first('female_img_2')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Female Image Description 2*</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" name="female_image_description_2" required
+                                           value="{{$scOneedit->female_image_description_2}}"
+                                           class="form-control {{$errors->has('female_image_description_2') ? 'is-invalid' : ''}}">
+                                </div>
+                                @if($errors->has('female_image_description_2'))
+                                    <span
+                                        class="help-block text-danger">{{$errors->first('female_image_description_2')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -111,7 +266,7 @@
                             <th>#</th>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Expected Result</th>
                             <th>Thumb</th>
                             <th>Action</th>
                         </tr>
@@ -122,7 +277,7 @@
                                 <th scope="row">{{$i + 1}}</th>
                                 <td>{{$c->category_name}}</td>
                                 <td>{{$c->name}}</td>
-                                <td>{{$c->description}}</td>
+                                <td>{{$c->expected_result}}</td>
                                 <td>
                                     <img src="{{asset($c->thumb_img)}}" width="50" height="50">
                                 </td>
