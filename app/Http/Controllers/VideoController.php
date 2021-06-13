@@ -114,7 +114,7 @@ class VideoController extends Controller
     {
         if (Auth::user()->isAbleTo('video')) {
 //            $videos = Video::all();
-            $videos = Video::orderBy('id', 'DESC')->paginate(5);
+            $videos = Video::orderBy('id', 'DESC')->paginate(15);
             foreach ($videos as $v) {
                 $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
                 $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
@@ -211,6 +211,16 @@ class VideoController extends Controller
                 $v->title = $request->title;
                 $v->instruction_title = $request->instruction_title;
                 $v->calorie = $request->calorie;
+                if ($request->hasFile('thumb_img')) {
+                    if (file_exists($v->thumb_img)) {
+                        unlink($v->thumb_img);
+                    }
+                    $img = $request->thumb_img;
+                    $img_name = time() . str_replace(" ", "_", $img->getClientOriginalName());
+                    $a = $img->move('uploads/thumbImages/Videos', $img_name);
+                    $d = 'uploads/thumbImages/Videos/' . $img_name;
+                    $v->thumb_img = $d;
+                }
                 $v->update();
                 VideoInstructions::where('video_id', $vid)->delete();
                 foreach ($request->instructions as $ins) {
