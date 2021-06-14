@@ -115,13 +115,13 @@ class VideoController extends Controller
         if (Auth::user()->isAbleTo('video')) {
 //            $videos = Video::all();
             $videos = Video::orderBy('id', 'DESC')->paginate(15);
+//            $videos = Video::orderBy('id', 'ASC')->paginate(500);
             foreach ($videos as $v) {
                 $sc2Name = VideoSubCategoryTwo::find($v->sub_category_two_id)->name;
                 $sc1Name = VideoSubCategoryOne::find($v->sub_category_one_id)->name;
                 $cName = VideoCategory::find($v->category_id)->name;
                 $v['category_name'] = $cName . " _ " . $sc1Name . " _ " . $sc2Name;
 //                $v['size'] = number_format((float)((File::size(public_path($v->video))) / 1024 / 1024), 3, '.', '');
-//                $v['size'] = number_format((float)((File::size("/home3/twinbit/api.twinbit.net/fitness/".$v->video)) / 1024 / 1024), 3, '.', '');
             }
             return view('videos.list', compact('videos'));
         } else {
@@ -164,8 +164,15 @@ class VideoController extends Controller
         if (Auth::user()->isAbleTo('video')) {
             $v = Video::find($vid);
             $vsc2id = $v->sub_category_two_id;
-            unlink($v->thumb_img);
-            unlink($v->video);
+            if (file_exists($v->thumb_img)) {
+                unlink($v->thumb_img);
+            }
+            $vs = Video::where('video', $v->video)->get();
+            if (count($vs) == 1){
+                if (file_exists($v->video)) {
+                    unlink($v->video);
+                }
+            }
 //            VideoInstructions::where('video_id', $v->id)->delete();
                 // on delete cascade
             $v->delete();
@@ -250,6 +257,44 @@ class VideoController extends Controller
             } else {
                 Session::flash('unSuccess', "Something went wrong :(");
                 return redirect()->back();
+            }
+        } else {
+            abort(403);
+        }
+    }
+
+
+
+    public function vts()
+    {
+        if (Auth::user()->isAbleTo('video')) {
+            dd('the functionality has been turned off by admin');
+            $videos = Video::all();
+            $flag = 0;
+            foreach ($videos as $i => $v1) {
+                $n1 =  substr($v1->video,25);
+                foreach ($videos as $j => $v2) {
+                    if ($i != $j) {
+                        $n2 = substr($v2->video,25);
+                        if (($n1 == $n2) && ($v1->video != $v2->video)) {
+//                            dd($v2);
+                            if (file_exists($v2->video)) {
+                                unlink($v2->video);
+                            }
+                            $v2->video = $v1->video;
+                            $v2->update();
+                            $flag = 1;
+                        }
+                    }
+                }
+                if ($flag == 1) {
+                    break;
+                }
+            }
+            if ($flag == 1) {
+                dd('found');
+            } else {
+                dd('all duplicate deleted');
             }
         } else {
             abort(403);

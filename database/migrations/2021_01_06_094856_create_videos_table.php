@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->float('length');
             $table->string('instruction_title');
-            $table->string('video')->unique();
+            $table->string('video');
             $table->float('calorie');
             $table->string('thumb_img');
             $table->integer('number_loop');

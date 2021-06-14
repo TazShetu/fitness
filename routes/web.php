@@ -119,5 +119,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/music/edit/{mid}', [MusicController::class, 'edit'])->name('music.edit');
     Route::post('/music/edit/{mid}', [MusicController::class, 'update'])->name('music.update');
 
+    Route::get('/vts', [VideoController::class, 'vts']);
+
+
 
 });
